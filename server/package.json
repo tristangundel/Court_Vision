@@ -1,0 +1,23 @@
+{
+  "name": "court_vision_server",
+  "version": "1.0.0",
+  "description": "Court Vision is a web based application for users to see statistics about their favorite players in the NBA with easy to follow visualizations. Basketball data will be scraped via the stats.nba.com API and dynamically displayed to the user. Users will be able to make informed decisions in fantasy leagues as well as wagers. (Oregon State University - CS467 Capstone Project)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tristangundel/Court_Vision.git"
+  },
+  "author": "Andres Arizala, Evan Speciale, Tristan Gundel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tristangundel/Court_Vision/issues"
+  },
+  "homepage": "https://github.com/tristangundel/Court_Vision#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.20"
+  }
+}
