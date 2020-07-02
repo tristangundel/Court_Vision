@@ -7,3 +7,24 @@ To start: \
 run "npm install" in client directory \
 run "npm install" in server directory \
 run "npm run dev" in server directory \
+
+Tools used within project:
+
+- node.js
+- MongoDB (MongoDB Atlas used here)
+- mongoose - allows modeling of data
+- GitHub - version control
+- bcyrptjs - used for password encryption
+- postman - to test requests
+- react dev tools
+- redux dev tools
+
+Dependencies used:
+
+- express-validator
+- bcryptjs
+- config - for global variables
+- jsonwebtoken - allows token for validation
+- mongoose - allows interaction with database
+- request - allows HTTP request with other APIs
+-
