@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
 
-// const User = require("../../models/User");
+const User = require("../../models/Users");
 
 // @routeGET    POST api/users
 // @desc        Register user
@@ -13,6 +13,7 @@ const { check, validationResult } = require("express-validator");
 router.post(
   "/",
   [
+    // Makes sure that information that user inputs is valid
     check("name", "Name is required").not().isEmpty(),
     check("email", "Please include a valid email").isEmail(),
     check(
