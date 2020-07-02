@@ -6,7 +6,9 @@ Server runs at port 5000, client runs at port 3000. \
 To start: \
 run "npm install" in client directory \
 run "npm install" in server directory \
-run "npm run dev" in server directory \
+run "npm run server" in server directory \
+
+With "npm run server" and nodemon set to run it will refresh automatically as you make updates and save changes!
 
 Tools used within project:
 
@@ -31,4 +33,4 @@ Dependencies used:
 Dev Dependencies:
 
 - nodemon - watches server to refresh as we update
-  -concurrently - can see run backend and frontend on one single command
+- concurrently - can see run backend and frontend on one single command
