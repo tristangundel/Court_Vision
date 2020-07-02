@@ -27,4 +27,8 @@ Dependencies used:
 - jsonwebtoken - allows token for validation
 - mongoose - allows interaction with database
 - request - allows HTTP request with other APIs
--
+
+Dev Dependencies:
+
+- nodemon - watches server to refresh as we update
+  -concurrently - can see run backend and frontend on one single command
