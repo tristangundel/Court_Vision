@@ -63,17 +63,18 @@ router.post(
         },
       };
 
-      jwt.sign(
-        payload,
-        config.get("jwSecret"),
-        // expiration is optional, but recommended.
-        // here it is set to long time because we are testing
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      // working on implementing this
+      // jwt.sign(
+      //   payload,
+      //   config.get("jwSecret"),
+      //   // expiration is optional, but recommended.
+      //   // here it is set to long time because we are testing
+      //   { expiresIn: 360000 },
+      //   (err, token) => {
+      //     if (err) throw err;
+      //     res.json({ token });
+      //   }
+      // );
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
