@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-// const auth = require("../../middleware/auth");
+const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const { check, validationResult } = require("express-validator");
@@ -13,7 +13,7 @@ const User = require("../../models/Users");
 // @access      Public
 
 // adding the auth below makes this route protected
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     // -password added to make sure password left off in data
     const user = await User.findById(req.user.id).select("-password");
@@ -32,6 +32,7 @@ router.post(
   "/",
   [
     check("email", "Please include a valid email").isEmail(),
+    // ensure it exsists
     check("password", "Password is required").exists(),
   ],
   async (req, res) => {
@@ -53,7 +54,7 @@ router.post(
           .json({ errors: [{ msg: "Invalid credentails" }] });
       }
 
-      // compare encrypted password with plain text
+      // compare plain text with encrypted password
       const isMatch = await bcrypt.compare(password, user.password);
 
       // see if there is not a match
@@ -72,7 +73,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwSecret"),
+        config.get("jwtSecret"),
         // expiration is optional, but recommended.
         // here it is set to long time because we are testing
         { expiresIn: 360000 },
