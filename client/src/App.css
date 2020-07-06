@@ -37,15 +37,3 @@
 Form Button {
     width: 100%;
 }
-
-Nav Button {
-    border: none;
-    background: #282c34;
-    text-transform: uppercase;
-    height: 100%;
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-size: inherit;
-    transition: all 0.3s;
-    outline: none;
-}
