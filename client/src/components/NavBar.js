@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, Form, FormControl} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { RiBasketballLine } from 'react-icons/ri';
@@ -41,11 +41,11 @@ const wcTeams = [
 ];
 
 const ecTeamsDropdown = ecTeams.map((team) =>
-    <NavDropdown.Item href={"#"+team.id}>{team.name}</NavDropdown.Item>
+    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <NavDropdown.Item href={"#"+team.id}>{team.name}</NavDropdown.Item>
+    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name} key={team.id} </NavDropdown.Item>
 );
 
 class NavBar extends React.Component {
