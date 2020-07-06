@@ -72,7 +72,7 @@ class NavBar extends React.Component {
                     <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link to="/login">Login</Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
