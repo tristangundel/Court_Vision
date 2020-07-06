@@ -1,5 +1,6 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, Button, Form, FormControl, Col} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { RiBasketballLine } from 'react-icons/ri';
@@ -51,8 +52,8 @@ const wcTeamsDropdown = wcTeams.map(team =>
 class NavBar extends React.Component {
     render() {
         return (
-            <Navbar className="navbar-dark bg-dark" expand='xl'>
-                <Navbar.Brand>
+            <Navbar className="navbar-dark bg-dark" expand='md'>
+                <Navbar.Brand href="/">
                     <RiBasketballLine size={36} className="d-inline-block align-top" />
                     CourtVision
                 </Navbar.Brand>
@@ -72,19 +73,7 @@ class NavBar extends React.Component {
                     <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Form inline>
-                            <Form.Row className='align-items-center'>
-                                <Col xs='auto'>
-                                    <FormControl type="text" size="sm" placeholder="username" className="mr-sm-2" />
-                                </Col>
-                                <Col xs='auto'>
-                                    <FormControl type="password" size="sm" placeholder="password" className="mr-sm-2" />
-                                </Col>
-                                <Col>
-                                    <Button variant="outline-info">Login</Button>
-                                </Col>
-                            </Form.Row>
-                        </Form>
+                        <Nav.Link to="/login">Login</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
