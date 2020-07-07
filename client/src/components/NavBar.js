@@ -45,7 +45,7 @@ const ecTeamsDropdown = ecTeams.map((team) =>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name} key={team.id} </NavDropdown.Item>
+    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
 );
 
 class NavBar extends React.Component {

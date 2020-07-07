@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { registerUser } from '../../redux/actions/authActions'
 import {Link, Redirect} from 'react-router-dom';
 import { Container, Row, Form, Button } from 'react-bootstrap';
 import { GiBasketballBall} from 'react-icons/gi';
@@ -13,10 +15,17 @@ class Register extends React.Component {
             username: "",
             password: "",
             confirmPass: "",
-            redirect: null
+            redirect: null,
+            errors: {}
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({errors: nextProps.errors});
+        }
     }
 
     handleChange(event) {
@@ -35,13 +44,7 @@ class Register extends React.Component {
             confirmPass: this.state.confirmPass
         }
 
-        axios.post('/api/users', newUser)
-            .then( res => {
-                console.log(res.data);
-                this.setState({redirect: "/login"});
-                return res.json();
-            })
-            .catch(err => console.log(err.message));
+        this.props.registerUser(newUser);
             
     }
 
@@ -63,6 +66,7 @@ class Register extends React.Component {
                                 name="email"
                                 value={this.state.email}
                                 onChange={this.handleChange} 
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formGroupUsername">
@@ -72,6 +76,7 @@ class Register extends React.Component {
                                 name="username"
                                 value={this.state.username}
                                 onChange={this.handleChange}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formGroupPassword">
@@ -81,6 +86,7 @@ class Register extends React.Component {
                                 name="password"
                                 value={this.state.password}
                                 onChange={this.handleChange}
+                                required
                             />
                         </Form.Group>
                         <Form.Group controlId="formGroupConfirmPassword">
@@ -90,6 +96,7 @@ class Register extends React.Component {
                                 name="confirmPass"
                                 value={this.state.confirmPass}
                                 onChange={this.handleChange}
+                                required
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">Register</Button>
@@ -101,4 +108,15 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+Register.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.authorization,
+    errors: state.errors
+})
+
+export default connect(mapStateToProps, { registerUser })(Register);

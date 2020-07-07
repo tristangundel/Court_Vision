@@ -12,10 +12,10 @@ class Login extends React.Component {
                         <h1 className="d-block-inline">CourtVision <GiBasketballBall size={48} className="d-block-inline align-top" /></h1>
                     </Row>
                     <Form>
-                            <Form.Group controlID="formGroupUsername">
+                            <Form.Group controlId="formGroupUsername">
                                 <Form.Control type="text" placeholder="Username" />
                             </Form.Group>
-                            <Form.Group controlID="formGroupPassword">
+                            <Form.Group controlId="formGroupPassword">
                                 <Form.Control type="password" placeholder="Password" />
                             </Form.Group>
                             <Button variant="primary" type="submit">Login</Button>
