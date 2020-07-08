@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { registerUser } from '../../redux/actions/authActions'
-import {Link, Redirect} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Row, Form, Button } from 'react-bootstrap';
 import { GiBasketballBall} from 'react-icons/gi';
+import { registerUser } from '../../redux/actions/authActions';
 
 class Register extends React.Component {
 
@@ -12,22 +13,23 @@ class Register extends React.Component {
         super();
         this.state = {
             email: "",
-            username: "",
+            name: "",
             password: "",
             confirmPass: "",
-            redirect: null,
             errors: {}
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    // Upon updating component, errors will be transferred to state
+    componentDidUpdate(nextProps) {
         if (nextProps.errors) {
             this.setState({errors: nextProps.errors});
         }
     }
 
+    // handles changes in the input values when a user types
     handleChange(event) {
         const {name, value} = event.target;
         this.setState({
@@ -35,6 +37,7 @@ class Register extends React.Component {
         });
     }
 
+    // handles submission of form to create a new user
     handleSubmit(event) {
         event.preventDefault();
         const newUser = {
@@ -44,14 +47,11 @@ class Register extends React.Component {
             confirmPass: this.state.confirmPass
         }
 
-        this.props.registerUser(newUser);
+        this.props.registerUser(newUser, this.props.history);
             
     }
 
-    render() {
-        if (this.state.redirect) {
-            return (<Redirect to={this.state.redirect} />);
-        }
+    render() {     
         return (
             <Container>
                 <div className="authForm">
@@ -69,11 +69,11 @@ class Register extends React.Component {
                                 required
                             />
                         </Form.Group>
-                        <Form.Group controlId="formGroupUsername">
+                        <Form.Group controlId="formGroupName">
                             <Form.Control 
                                 type="text"
-                                placeholder="Username"
-                                name="username"
+                                placeholder="Name"
+                                name="name"
                                 value={this.state.username}
                                 onChange={this.handleChange}
                                 required
@@ -119,4 +119,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
