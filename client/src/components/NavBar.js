@@ -1,8 +1,12 @@
 import React from 'react';
-import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
+import { RiBasketballLine } from 'react-icons/ri';
+import { userLogout } from '../redux/actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { RiBasketballLine } from 'react-icons/ri';
 
 const ecTeams = [
     { name: 'Atlanta Hawks', id: 'ATL' },
@@ -41,15 +45,42 @@ const wcTeams = [
 ];
 
 const ecTeamsDropdown = ecTeams.map((team) =>
-    <NavDropdown.Item href={"#"+team.id}>{team.name}</NavDropdown.Item>
+    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <NavDropdown.Item href={"#"+team.id}>{team.name}</NavDropdown.Item>
+    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
 );
 
 class NavBar extends React.Component {
+    constructor() {
+        super();
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    }
+
+    // handles function when user clicks on logout
+    handleLogoutClick(event) {
+        event.preventDefault();
+        this.props.userLogout(this.props.history);
+    }
+
     render() {
+        // retrieve whether or not user is logged in
+        const { isAuthenticated } = this.props.auth;
+        
+        // section of navbar to be seen by users who are logged in
+        const loggedInLinks = (
+            <Nav>
+                <Nav.Link onClick={this.handleLogoutClick}>Logout</Nav.Link>
+            </Nav>
+        );
+        // section of navbar to be seen by users who are not logged in
+        const guestLinks = (
+            <Nav>
+                <Nav.Link href="/login">Login</Nav.Link>
+            </Nav>
+        )
+
         return (
             <Navbar className="navbar-dark bg-dark" expand='md'>
                 <Navbar.Brand href="/">
@@ -71,13 +102,20 @@ class NavBar extends React.Component {
                     </NavDropdown>
                     <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
                     </Nav>
-                    <Nav>
-                        <Nav.Link href="/login">Login</Nav.Link>
-                    </Nav>
+                    {isAuthenticated ? loggedInLinks : guestLinks}
                 </Navbar.Collapse>
             </Navbar>
         );
     }
 }
+NavBar.propTypes = {
+    userLogout: PropTypes.func.isRequired,
+    auth: PropTypes.object
+}
 
-export default NavBar;
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, { userLogout })(withRouter(NavBar) );
