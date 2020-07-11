@@ -2,12 +2,16 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const config = require("config");
+var bodyParser = require("body-parser");
 
 // assign variables for port and application's server
 const app = express();
 const port = process.env.port || 5000;
 
 connectDB();
+
+// tells routes to use this
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // init middleware
 app.use(express.json({ extended: false }));
