@@ -30,6 +30,37 @@ app.listen(port, function () {
   console.log("Server started: Listening on port " + port + ".");
 });
 
+app.get("/get-houston", (req, res) => {
+  var http = require("https");
+
+  var options = {
+    method: "GET",
+    hostname: "api-nba-v1.p.rapidapi.com",
+    port: null,
+    path: "/teams/city/Houston",
+    headers: {
+      "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+      "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
+      useQueryString: true,
+    },
+  };
+
+  var req = http.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function () {
+      var body = Buffer.concat(chunks);
+      console.log(body.toString());
+    });
+  });
+
+  req.end();
+});
+
 // Below is the start for the API calls
 // Currently it is commented out, when left in it makes calls to the API
 
