@@ -6,7 +6,7 @@ Server runs at port 5000, client runs at port 3000. \
 To start: \
 run "npm install" in client directory \
 run "npm install" in server directory \
-run "npm run server" in server directory \
+run "npm run dev" in server directory to run both server and client \
 
 With "npm run server" and nodemon set to run it will refresh automatically as you make updates and save changes!
 

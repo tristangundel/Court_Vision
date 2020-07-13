@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom';
+import { RiBasketballLine } from 'react-icons/ri';
+import { userLogout } from '../redux/actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import { RiBasketballLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
 
 const ecTeams = [
     { name: 'Atlanta Hawks', id: 'ATL' },
@@ -51,7 +54,34 @@ const wcTeamsDropdown = wcTeams.map(team =>
 );
 
 class NavBar extends React.Component {
+    constructor() {
+        super();
+        this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    }
+
+    // handles function when user clicks on logout
+    handleLogoutClick(event) {
+        event.preventDefault();
+        this.props.userLogout(this.props.history);
+    }
+
     render() {
+        // retrieve whether or not user is logged in
+        const { isAuthenticated } = this.props.auth;
+        
+        // section of navbar to be seen by users who are logged in
+        const loggedInLinks = (
+            <Nav>
+                <Nav.Link onClick={this.handleLogoutClick}>Logout</Nav.Link>
+            </Nav>
+        );
+        // section of navbar to be seen by users who are not logged in
+        const guestLinks = (
+            <Nav>
+                <Nav.Link href="/login">Login</Nav.Link>
+            </Nav>
+        )
+
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
@@ -121,5 +151,14 @@ class NavBar extends React.Component {
         );
     }
 }
+NavBar.propTypes = {
+    userLogout: PropTypes.func.isRequired,
+    auth: PropTypes.object
+}
 
-export default NavBar;
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, { userLogout })(withRouter(NavBar) );

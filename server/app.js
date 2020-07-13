@@ -1,6 +1,7 @@
 // declare variables for dependencies
 const express = require("express");
 const connectDB = require("./config/db");
+const config = require("config");
 
 // assign variables for port and application's server
 const app = express();
@@ -24,3 +25,64 @@ app.use("/api/posts", require("./routes/api/posts"));
 app.listen(port, function () {
   console.log("Server started: Listening on port " + port + ".");
 });
+
+// Below is the start for the API calls
+// Currently it is commented out, when left in it makes calls to the API
+
+// var http = require("https");
+
+// var options = {
+//   method: "GET",
+//   hostname: "api-nba-v1.p.rapidapi.com",
+//   port: null,
+//   path: "/seasons/",
+//   headers: {
+//     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+//     "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
+//     useQueryString: true,
+//   },
+// };
+
+// var req = http.request(options, function (res) {
+//   var chunks = [];
+
+//   res.on("data", function (chunk) {
+//     chunks.push(chunk);
+//   });
+
+//   res.on("end", function () {
+//     var body = Buffer.concat(chunks);
+//     console.log(body.toString());
+//   });
+// });
+
+// req.end();
+
+// var http = require("https");
+
+// var options = {
+//   method: "GET",
+//   hostname: "api-nba-v1.p.rapidapi.com",
+//   port: null,
+//   path: "/teams/city/Houston",
+//   headers: {
+//     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+//     "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
+//     useQueryString: true,
+//   },
+// };
+
+// var req = http.request(options, function (res) {
+//   var chunks = [];
+
+//   res.on("data", function (chunk) {
+//     chunks.push(chunk);
+//   });
+
+//   res.on("end", function () {
+//     var body = Buffer.concat(chunks);
+//     console.log(body.toString());
+//   });
+// });
+
+// req.end();
