@@ -1,8 +1,9 @@
 import React from 'react';
-import { Navbar, Nav, NavDropdown, Form, FormControl } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { RiBasketballLine } from 'react-icons/ri';
 import { userLogout } from '../redux/actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -45,11 +46,11 @@ const wcTeams = [
 ];
 
 const ecTeamsDropdown = ecTeams.map((team) =>
-    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
+    <Link className="dropdown-item" to={"team/"+ team.id}>{team.name}</Link>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <NavDropdown.Item href={"/"+team.id} key={team.id}>{team.name}</NavDropdown.Item>
+    <Link className="dropdown-item" to={"team/" + team.id}>{team.name}</Link>
 );
 
 class NavBar extends React.Component {
@@ -82,29 +83,71 @@ class NavBar extends React.Component {
         )
 
         return (
-            <Navbar className="navbar-dark bg-dark" expand='md'>
-                <Navbar.Brand href="/">
-                    <RiBasketballLine size={36} className="d-inline-block align-top" />
-                    CourtVision
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                <Navbar.Collapse id='basic-navbar-nav'>
-                    <Nav className='mr-auto'>
-                    <Form inline>
-                        <FormControl type="text" placeholder="Player Search" className="mr-sm-2" />
-                    </Form>
-                    <NavDropdown title="Teams">
-                        <NavDropdown.Header>Eastern Conference</NavDropdown.Header>
-                        {ecTeamsDropdown}
-                        <NavDropdown.Divider />
-                        <NavDropdown.Header>Western Conference</NavDropdown.Header>
-                        {wcTeamsDropdown}
-                    </NavDropdown>
-                    <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
-                    </Nav>
-                    {isAuthenticated ? loggedInLinks : guestLinks}
-                </Navbar.Collapse>
-            </Navbar>
+            <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+                <div className="container">
+                    <Link className="navbar-brand" to="/">CourtVision</Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div className="collapse navbar-collapse" id="mobile-nav">
+                        <ul className="navbar-nav mr-auto">
+                            <form className="form-inline">
+                                <input className="form-control mr-sm-2" type="search" placeholder="Player Search" aria-label="Search"></input>
+                            </form>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Teams
+                                </a>
+                                <div className='dropdown-menu' aria-labelledby="navbarDropdownMenuLink">
+                                    {ecTeamsDropdown}
+                                    {wcTeamsDropdown}
+                                </div>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/leagueleaders">League Leaders</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/testplayer">Test Player</Link>
+                            </li>
+                        </ul>
+
+                        <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/register">Sign Up</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/login">Login</Link>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            // <Navbar className="navbar-dark bg-dark" expand='md'>
+            //     <Navbar.Brand href="/">
+            //         <RiBasketballLine size={36} className="d-inline-block align-top" />
+            //         CourtVision
+            //     </Navbar.Brand>
+            //     <Navbar.Toggle aria-controls='basic-navbar-nav' />
+            //     <Navbar.Collapse id='basic-navbar-nav'>
+            //         <Nav className='mr-auto'>
+            //         <Form inline>
+            //             <FormControl type="text" placeholder="Player Search" className="mr-sm-2" />
+            //         </Form>
+            //         <NavDropdown title="Teams">
+            //             <NavDropdown.Header>Eastern Conference</NavDropdown.Header>
+            //             {ecTeamsDropdown}
+            //             <NavDropdown.Divider />
+            //             <NavDropdown.Header>Western Conference</NavDropdown.Header>
+            //             {wcTeamsDropdown}
+            //         </NavDropdown>
+            //         <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
+            //         </Nav>
+            //         <Nav>
+            //             <Nav.Link href="/login">Login</Nav.Link>
+            //         </Nav>
+            //     </Navbar.Collapse>
+            // </Navbar>
         );
     }
 }
