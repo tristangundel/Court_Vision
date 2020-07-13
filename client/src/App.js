@@ -10,7 +10,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import teams from "./components/teams";
+import PersonList from "./components/PersonList";
 
 function App() {
   // set current user if token exists in redux store
@@ -32,6 +32,7 @@ function App() {
             <Route exact path='/register' component={Register} />
             <Route exact path='/login' component={Login} />
           </div>
+          <PersonList />
         </div>
       </Router>
     </Provider>
