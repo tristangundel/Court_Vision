@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Navbar, Nav, NavDropdown, Button, DropdownButton, Form, FormControl, Dropdown, Col} from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
@@ -71,16 +70,26 @@ class NavBar extends React.Component {
         
         // section of navbar to be seen by users who are logged in
         const loggedInLinks = (
-            <Nav>
-                <Nav.Link onClick={this.handleLogoutClick}>Logout</Nav.Link>
-            </Nav>
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Nav.Link onClick={this.handleLogoutClick}>Logout</Nav.Link>
+                </li>
+            </ul>
+            
+            
         );
         // section of navbar to be seen by users who are not logged in
         const guestLinks = (
-            <Nav>
-                <Nav.Link href="/login">Login</Nav.Link>
-            </Nav>
-        )
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/register">Sign Up</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
+            </ul>
+        );
+              
 
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -111,15 +120,7 @@ class NavBar extends React.Component {
                                 <Link className="nav-link" to="/testplayer">Test Player</Link>
                             </li>
                         </ul>
-
-                        <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/register">Sign Up</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        </ul>
+                        {isAuthenticated ? loggedInLinks : guestLinks}
                     </div>
                 </div>
             </nav>
