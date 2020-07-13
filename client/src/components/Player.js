@@ -1,27 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// const playerInfo = {
-//     "firstName":"LeBron",
-//     "lastName":"James",
-//     "teamId":"17",
-//     "yearsPro":"16",
-//     "collegeName":" ",
-//     "country":"USA",
-//     "playerId":"265",
-//     "dateOfBirth":"1984-12-30",
-//     "affiliation":"St. Vincent-St. Mary HS (OH)/USA",
-//     "startNba":"2003",
-//     "heightInMeters":"2.06",
-//     "weightInKilograms":"113.4",
-//     "leagues":{
-//         "standard":{
-//             "jersey":"23",
-//             "active":"1",
-//             "pos":"F"
-//         }
-//     }
-// }
 const playerInfo = {
     "firstName":"James",
     "lastName":"Harden",
@@ -149,7 +128,7 @@ const pgStats = perGameStats.map(season =>
     </tr>
 );
 class Player extends React.Component {
-    
+
     render() {
         return (
             <div className="player justify-content-center">
@@ -224,6 +203,8 @@ class Player extends React.Component {
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                        <div>
                         </div>
                     </div>
                 </div>

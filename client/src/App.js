@@ -8,6 +8,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Player from './components/Player';
 import Team from './components/Team';
+import LeagueLeaders from './components/LeagueLeaders';
 
 function App() {
     return ( 
@@ -20,6 +21,7 @@ function App() {
             <Route exact path='/login' component={ Login } />
             <Route exact path='/testplayer' component= { Player } />
             <Route exact path='/team/ATL' component= { Team } />
+            <Route exact path='/leagueleaders' component= {LeagueLeaders} />
           </div>
           <Footer />
         </div>
