@@ -20,8 +20,8 @@ class Login extends React.Component {
     }
 
     // when component updates current errors will be transferred to component's state
-    componentDidUpdatew(nextProps) {
-        if (nextProps.errors) {
+    componentDidUpdate(nextProps) {
+        if (!(Object.keys(nextProps.errors).length === 0) && typeof(nextProps.errors) === "object") {
             this.setState({errors: nextProps.errors});
         }
     }

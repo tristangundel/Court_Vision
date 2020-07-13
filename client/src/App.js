@@ -27,21 +27,6 @@ function App() {
   }
 
     return ( 
-      <Router>
-        <div>
-          <NavBar / >
-          <Route exact path='/' component={ HomePage } />
-          <div id='container'>
-            <Route exact path='/register' component={ Register } />
-            <Route exact path='/login' component={ Login } />
-            <Route exact path='/testplayer' component= { Player } />
-            <Route exact path='/team/ATL' component= { Team } />
-            <Route exact path='/leagueleaders' component= {LeagueLeaders} />
-          </div>
-          <Footer />
-        </div>
-      </Router>
-
       <Provider store={store}>
         <Router>
           <div className = 'App' >

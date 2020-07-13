@@ -133,7 +133,7 @@ class Player extends React.Component {
         return (
             <div className="player justify-content-center">
                 <div className="text-light">
-                    <div className="container  dark-overlay center">
+                    <div className="container dark-overlay center">
                         <div className="row">
                             <div className="col-4">
                                 <img height='250px' src={ require('../img/201935.png')}></img>
@@ -141,11 +141,11 @@ class Player extends React.Component {
                             <div className="col-8">
                                 <h1 className='display-3'>
                                     {playerInfo.firstName} {playerInfo.lastName}
-                                    <small class="text-muted"> - {playerInfo.leagues.standard.pos}</small>
+                                    <small className="text-muted"> - {playerInfo.leagues.standard.pos}</small>
                                 </h1>
                                 <h3 className='display-4'>
                                     Houston Rockets
-                                    <small class="text-muted"> - #{playerInfo.leagues.standard.jersey}</small>
+                                    <small className="text-muted"> - #{playerInfo.leagues.standard.jersey}</small>
                                 </h3>
                                 <div className="row">
                                     <div className="col-3">
