@@ -120,10 +120,7 @@ class NavBar extends React.Component {
                                 <Link className="nav-link" to="/testplayer">Test Player</Link>
                             </li>
                         </ul>
-
-                        <ul className="navbar-nav ml-auto">
-                            {isAuthenticated ? loggedInLinks : guestLinks}
-                        </ul>
+                        {isAuthenticated ? loggedInLinks : guestLinks}
                     </div>
                 </div>
             </nav>
