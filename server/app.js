@@ -3,6 +3,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const config = require("config");
 var bodyParser = require("body-parser");
+const axios = require("axios");
 
 // assign variables for port and application's server
 const app = express();
@@ -31,34 +32,24 @@ app.listen(port, function () {
 });
 
 app.get("/get-houston", (req, res) => {
-  var http = require("https");
+  const axios = require("axios");
 
-  var options = {
+  axios({
     method: "GET",
-    hostname: "api-nba-v1.p.rapidapi.com",
-    port: null,
-    path: "/teams/city/Houston",
+    url: "https://api-nba-v1.p.rapidapi.com/teams/city/Houston",
     headers: {
+      "content-type": "application/octet-stream",
       "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
       "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
       useQueryString: true,
     },
-  };
-
-  var req = http.request(options, function (res) {
-    var chunks = [];
-
-    res.on("data", function (chunk) {
-      chunks.push(chunk);
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
     });
-
-    res.on("end", function () {
-      var body = Buffer.concat(chunks);
-      console.log(body.toString());
-    });
-  });
-
-  req.end();
 });
 
 // Below is the start for the API calls
