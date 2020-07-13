@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Player from './components/Player';
+import Team from './components/Team';
 
 function App() {
     return ( 
@@ -18,6 +19,7 @@ function App() {
             <Route exact path='/register' component={ Register } />
             <Route exact path='/login' component={ Login } />
             <Route exact path='/testplayer' component= { Player } />
+            <Route exact path='/team/ATL' component= { Team } />
           </div>
           <Footer />
         </div>

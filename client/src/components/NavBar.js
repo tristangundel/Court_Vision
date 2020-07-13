@@ -43,11 +43,11 @@ const wcTeams = [
 ];
 
 const ecTeamsDropdown = ecTeams.map((team) =>
-    <Link className="dropdown-item" to={team.id}>{team.name}</Link>
+    <Link className="dropdown-item" to={"team/"+ team.id}>{team.name}</Link>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <Link className="dropdown-item" to={team.id}>{team.name}</Link>
+    <Link className="dropdown-item" to={"team/" + team.id}>{team.name}</Link>
 );
 
 class NavBar extends React.Component {
