@@ -1,5 +1,5 @@
 import React from 'react'
-import { GiDarkSquad, GiLightBackpack } from 'react-icons/gi'
+// import { GiDarkSquad, GiLightBackpack } from 'react-icons/gi'
 
 export default function Footer() {
     return (
