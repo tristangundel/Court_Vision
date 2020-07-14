@@ -24,7 +24,7 @@ class Register extends React.Component {
 
     // Upon updating component, errors will be transferred to state
     componentDidUpdate(nextProps) {
-        if (nextProps.errors) {
+        if (!(Object.keys(nextProps.errors).length === 0) && typeof(nextProps.errors) === "object") {
             this.setState({errors: nextProps.errors});
         }
     }
