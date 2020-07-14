@@ -3,7 +3,7 @@ import { Nav } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
-import { RiBasketballLine } from 'react-icons/ri';
+// import { RiBasketballLine } from 'react-icons/ri';
 import { userLogout } from '../redux/actions/authActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
@@ -45,11 +45,11 @@ const wcTeams = [
 ];
 
 const ecTeamsDropdown = ecTeams.map((team) =>
-    <Link className="dropdown-item" to={"team/"+ team.id}>{team.name}</Link>
+    <Link className="dropdown-item" to={"/team/"+ team.id} key={team.id}>{team.name}</Link>
 );
 
 const wcTeamsDropdown = wcTeams.map(team =>
-    <Link className="dropdown-item" to={"team/" + team.id}>{team.name}</Link>
+    <Link className="dropdown-item" to={"/team/" + team.id} key={team.id}>{team.name}</Link>
 );
 
 class NavBar extends React.Component {

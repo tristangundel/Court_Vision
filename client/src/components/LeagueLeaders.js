@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import LeaderTable from './LeaderTable';
 
 class LeagueLeaders extends React.Component {
