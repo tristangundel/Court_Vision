@@ -8,7 +8,7 @@ import store from './redux/store';
 import './App.css';
 import NavBar from './components/NavBar';
 import HomePage from './components/HomePage';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Player from './components/Player';
@@ -36,7 +36,7 @@ function App() {
               <Route exact path='/register' component={ Register } />
               <Route exact path='/login' component={ Login } />
               <Route exact path='/testplayer' component= { Player } />
-              <Route exact path='/team/ATL' component= { Team } />
+              <Route exact path='/team/:teamId' component= { Team } />
               <Route exact path='/leagueleaders' component= {LeagueLeaders} />
             </div>
           </div>
