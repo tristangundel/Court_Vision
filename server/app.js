@@ -11,6 +11,7 @@ connectDB();
 
 // init middleware
 app.use(express.json({ extended: false }));
+app.use(express.static('./utils'));
 
 app.get("/", function (req, res) {
   res.send("Welcome to Court Vision");

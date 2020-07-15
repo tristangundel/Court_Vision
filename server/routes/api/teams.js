@@ -1,52 +1,39 @@
-const axios = require('axios');
 const express = require("express");
 const router = express.Router();
-const config = require("config");
+const nba = require('nba-api-client');
+const teamKeys = require('../../utils/teamKeys');
 
 // @routeGET    api/teams
 // @desc        Test route
 // @access      Public
 router.get("/:teamKey", (req, res) => {
-    axios({
-        method: "GET",
-        url: `https://api-nba-v1.p.rapidapi.com/teams/shortName/${req.params.teamKey}`,
-        headers: {
-            "content-type": "application/octet-stream",
-            "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-            "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
-            useQueryString: true
-        }
-    })
-    .then((teamData) => {
-        axios({
-            method: "GET",
-            url: `https://api-nba-v1.p.rapidapi.com/players/teamId/${teamData.data.api.teams[0].teamId}`,
-            headers: {
-                "content-type": "application/octet-stream",
-                "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                "x-rapidapi-key": config.get("RAPIDAPI_KEY"),
-                useQueryString: true
-            }
-        })
-        .then((playerData) => {
-            let players = [];
-            playerData.data.api.players.forEach((player) => {
-                if (player.leagues.standard && player.leagues.standard.active === "1"){
-                    players.push(player);
-                }
-            })
+    getTeam(teamKeys, req.params.teamKey, res);
+});
+
+function getRoster(teamKeys, key) {
+    return nba.teamRoster({TeamID: nba.getTeamID(teamKeys[key]).TeamID, Season: "2019-20"});
+};
+
+function getTeamInfo(teamKeys, key) {
+    return nba.teamDetails({TeamID: nba.getTeamID(teamKeys[key]).TeamID})
+};
+
+function getTeamLogo(teamKeys, key) {
+    return nba.getTeamLogoURLs(teamKeys[key])[0];
+}
+
+function getTeam(teamKeys, key, res) {
+    getRoster(teamKeys, key).then((rosterData) => {
+        getTeamInfo(teamKeys, key).then((infoData) => {
             res.send({
-                team: teamData.data.api.teams[0],
-                players: players
+                Roster: rosterData,
+                Info: infoData,
+                Logo: getTeamLogo(teamKeys, key)
             });
         })
-        .catch((playerError) => {
-            console.log(playerError);
-        });
+        .catch((infoError) => console.log(infoError))
     })
-    .catch((error) => {
-        console.log(error);
-    });
-});
+    .catch((rosterError) => console.log(rosterError));
+}
 
 module.exports = router;
