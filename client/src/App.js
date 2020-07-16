@@ -39,7 +39,6 @@ function App() {
               <Route exact path='/team/:teamID' component= { Team } />
               <Route exact path='/leagueleaders' component= {LeagueLeaders} />
             </div>
-          </div>
         </div>
       </Router>
     </Provider>
