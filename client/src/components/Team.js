@@ -8,6 +8,7 @@ class Team extends React.Component {
         super();
         this.state = {
             teamInfo: {},
+            seasonRanks: {},
             playersInfo: [],
             logo: "",
             id: ""
@@ -19,7 +20,8 @@ class Team extends React.Component {
         axios.get(`/api/teams/${ID}`)
         .then((results) => {
             this.setState({
-                teamInfo: results.data.Info.TeamBackground, 
+                teamInfo: results.data.Info.TeamInfoCommon, 
+                seasonRanks: results.data.Info.TeamSeasonRanks,
                 playersInfo: results.data.Roster.CommonTeamRoster,
                 logo: results.data.Logo,
                 id: ID
@@ -71,24 +73,24 @@ class Team extends React.Component {
                                     <div className="row">
                                         <div className="col-3">
                                             <div>2019-20 Season </div>
-                                            <div>20-47 (.299)</div>
-                                            <div>14th in Eastern Conf</div>
+                                            <div>{this.state.teamInfo.W}-{this.state.teamInfo.L} ({this.state.teamInfo.PCT})</div>
+                                            <div>{this.state.teamInfo.CONF_RANK} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
-                                            <h3>16th</h3>
+                                            <h3>{this.state.seasonRanks.PTS_RANK}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>RPG</h2>
-                                            <h3>21st</h3>
+                                            <h3>{this.state.seasonRanks.REB_RANK}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>APG</h2>
-                                            <h3>18th</h3>
+                                            <h3>{this.state.seasonRanks.ASTPTS_RANK}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>OPG</h2>
-                                            <h3>30th</h3>
+                                            <h3>{this.state.seasonRanks.OPP_PTS_RANK}</h3>
                                         </div>   
                                     </div>
                                 </div>
