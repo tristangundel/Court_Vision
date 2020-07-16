@@ -1,171 +1,6 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
 const axios = require('axios');
-// import { Link } from 'react-router-dom';
-// import { render } from 'react-dom';
-
-
-// const teamInfo = {
-//     "city":"Atlanta",
-//     "fullName":"Atlanta Hawks",
-//     "teamId":"1",
-//     "nickname":"Hawks",
-//     "logo":"https://upload.wikimedia.org/wikipedia/fr/e/ee/Hawks_2016.png",
-//     "shortName":"ATL",
-//     "allStar":"0",
-//     "nbaFranchise":"1",
-//     "leagues":{
-//         "standard":{
-//             "confName":"East",
-//             "divName":"Southeast"
-//         }
-//     }
-// }
-
-// const playersInfo = [
-//     {   
-//         "firstName":"Jeff",
-//         "lastName":"Teague",
-//         "collegeName":"Wake Forest",
-//         "country":"USA",
-//         "dateOfBirth":"1988-06-10",
-//         "heightInMeters":"1.91",
-//         "weightInKilograms":"88.45",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"00",
-//                 "pos":"G" 
-//             }
-//         }
-//     },
-//     {
-//         "firstName":"Brandon",
-//         "lastName":"Goodwin",
-//         "collegeName":"Florida Gulf Coast",
-//         "country":"USA",
-//         "dateOfBirth":"1995-10-02",
-//         "heightInMeters":"1.83",
-//         "weightInKilograms":"81.65",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"0",
-//                 "pos":"G"
-//             }
-//         }
-//     },
-//     {   
-//         "firstName":"Treveon",
-//         "lastName":"Graham",
-//         "collegeName":"Virginia Commonwealth",
-//         "country":"USA",
-//         "dateOfBirth":"1993-10-28",
-//         "heightInMeters":"1.96",
-//         "weightInKilograms":"99.3367",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"2",
-//                 "pos":"G-F" 
-//             }
-//         }
-//     },
-//     {   
-//         "firstName":"Kevin",
-//         "lastName":"Huerter",
-//         "collegeName":"Maryland",
-//         "country":"USA",
-//         "dateOfBirth":"1998-08-27",
-//         "heightInMeters":"2.01",
-//         "weightInKilograms":"86.1826",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"3",
-//                 "pos":"G-F" 
-//             }
-//         }
-//     },
-//     {   
-//         "firstName":"Charles",
-//         "lastName":"Brown, Jr.",
-//         "collegeName":"",
-//         "country":"USA",
-//         "dateOfBirth":"1997-02-02",
-//         "heightInMeters":"1.98",
-//         "weightInKilograms":"90.26",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"4",
-//                 "pos":"G" 
-//             }
-//         }
-//     },
-//     {   
-//         "firstName":"Skal",
-//         "lastName":"Labissiere",
-//         "collegeName":"Kentucky",
-//         "country":"Haiti",
-//         "dateOfBirth":"1996-03-18",
-//         "heightInMeters":"2.0828",
-//         "weightInKilograms":"106.594",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"7",
-//                 "pos":"F-C" 
-//             }
-//         }
-//     },
-//     {   
-//         "firstName":"Trae",
-//         "lastName":"Young",
-//         "collegeName":"Oklahoma",
-//         "country":"USA",
-//         "dateOfBirth":"1998-09-19",
-//         "heightInMeters":"1.85",
-//         "weightInKilograms":"81.6466",
-//         "leagues":{
-//             "standard":{
-//                 "jersey":"11",
-//                 "pos":"G" 
-//             }
-//         }
-//     },
-// ]
-
-function getAge(dob) {
-    var today = new Date();
-    var birthDate = new Date(dob);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age = age - 1;
-    }
-
-    return age;
-}
-
-function getHeight(hinm) {
-    var feet = Math.floor(hinm * 3.281);
-    var inches = Math.floor(hinm * 39.37 % 12);
-    var height = feet + "' " + inches + "\""
-
-    return height;
-}
-
-function getWeight(wik) {
-    return Math.floor(wik * 2.205);
-}
-
-// const roster = playersInfo.map(player =>
-//     <tr>
-//         <td scope="row">{player.firstName} {player.lastName}</td>
-//         <td>{player.leagues.standard.jersey}</td>
-//         <td>{player.leagues.standard.pos}</td>
-//         <td>{getHeight(player.heightInMeters)}</td>
-//         <td>{getWeight(player.weightInKilograms)}</td>
-//         <td>{getAge(player.dateOfBirth)}</td>
-//         <td>{player.collegeName}</td>
-//     </tr>
-// );
-
 
 class Team extends React.Component {
 
@@ -173,39 +8,53 @@ class Team extends React.Component {
         super();
         this.state = {
             teamInfo: {},
-            playersInfo: []
+            playersInfo: [],
+            logo: "",
+            id: ""
         };
+        this.getInfo = this.getInfo.bind(this);
     }
 
-    componentDidMount() {
-        axios.get(`/api/teams/${this.props.match.params.teamId}`)
+    getInfo(ID) {
+        axios.get(`/api/teams/${ID}`)
         .then((results) => {
             this.setState({
-                teamInfo: results.data.team, 
-                playersInfo: results.data.players
+                teamInfo: results.data.Info.TeamBackground, 
+                playersInfo: results.data.Roster.CommonTeamRoster,
+                logo: results.data.Logo,
+                id: ID
             });
         })
         .catch((error) => {
             console.log(error);
         });
     }
+    
+    componentDidMount() {
+        this.getInfo(this.props.match.params.teamID);
+    }
 
     componentWillReceiveProps(nextProps) {
-        
+        if (this.state.id !== nextProps.match.params.teamID) {
+            this.getInfo(nextProps.match.params.teamID);
+        }
     }
 
     render() {
-        let roster = this.state.playersInfo.map(player =>
-            <tr>
-                <td scope="row">{player.firstName} {player.lastName}</td>
-                <td>{player.leagues.standard.jersey}</td>
-                <td>{player.leagues.standard.pos}</td>
-                <td>{getHeight(player.heightInMeters)}</td>
-                <td>{getWeight(player.weightInKilograms)}</td>
-                <td>{getAge(player.dateOfBirth)}</td>
-                <td>{player.collegeName}</td>
-            </tr>
-        );
+        let roster = [];
+        for (var key in this.state.playersInfo){
+            roster.push((
+                <tr key={this.state.playersInfo[key].PLAYER}>
+                    <td scope="row">{this.state.playersInfo[key].PLAYER}</td>
+                    <td>{this.state.playersInfo[key].NUM}</td>
+                    <td>{this.state.playersInfo[key].POSITION}</td>
+                    <td>{this.state.playersInfo[key].HEIGHT}</td>
+                    <td>{this.state.playersInfo[key].WEIGHT}</td>
+                    <td>{this.state.playersInfo[key].AGE}</td>
+                    <td>{this.state.playersInfo[key].SCHOOL}</td>
+                </tr>
+            ))
+        }
         if (!(Object.keys(this.state.teamInfo).length === 0) && typeof(this.state.teamInfo) === "object") {
             return (
                 <div className="player justify-content-center">
@@ -213,17 +62,17 @@ class Team extends React.Component {
                         <div className="container  dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.teamInfo.logo }></img>
+                                    <img height='250px' src={ this.state.logo }></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
-                                        {this.state.teamInfo.fullName}
+                                        {`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}
                                     </h1>
                                     <div className="row">
                                         <div className="col-3">
                                             <div>2019-20 Season </div>
                                             <div>20-47 (.299)</div>
-                                            <div>14th in {this.state.teamInfo.leagues.standard.confName}</div>
+                                            <div>14th in Eastern Conf</div>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
@@ -272,5 +121,6 @@ class Team extends React.Component {
         }
     }
 }
+
 
 export default Team;
