@@ -167,7 +167,7 @@ class Player extends React.Component {
         for (var key in this.state.playerStats){
             seasonStats.push((
                 <tr key={key}>
-                    <td scope="row">{this.state.playerStats[key].GROUP_VALUE}</td>
+                    <td>{this.state.playerStats[key].GROUP_VALUE}</td>
                     <td>{this.state.playerStats[key].TEAM_ABBREVIATION}</td>
                     <td>{this.state.playerStats[key].GP}</td>
                     <td>{this.state.playerStats[key].MIN}</td>
@@ -199,7 +199,7 @@ class Player extends React.Component {
                         <div className="container dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.playerPhoto }></img>
+                                    <img height='250px' src={ this.state.playerPhoto } alt={this.state.playerInfo.DISPLAY_FIRST_LAST}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className='display-3'>

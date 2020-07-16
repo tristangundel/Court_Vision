@@ -45,7 +45,7 @@ class Team extends React.Component {
         for (var key in this.state.playersInfo){
             roster.push((
                 <tr key={this.state.playersInfo[key].PLAYER}>
-                    <td scope="row">{this.state.playersInfo[key].PLAYER}</td>
+                    <td>{this.state.playersInfo[key].PLAYER}</td>
                     <td>{this.state.playersInfo[key].NUM}</td>
                     <td>{this.state.playersInfo[key].POSITION}</td>
                     <td>{this.state.playersInfo[key].HEIGHT}</td>
@@ -62,7 +62,7 @@ class Team extends React.Component {
                         <div className="container  dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.logo }></img>
+                                    <img height='250px' src={ this.state.logo } alt={`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
