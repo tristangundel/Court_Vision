@@ -11,6 +11,7 @@ router.get("/:teamKey", (req, res) => {
 });
 
 function getRoster(teamKeys, key) {
+    console.log(nba.teamRoster({TeamID: nba.getTeamID(teamKeys[key]).TeamID, Season: "2019-20"}));
     return nba.teamRoster({TeamID: nba.getTeamID(teamKeys[key]).TeamID, Season: "2019-20"});
 };
 

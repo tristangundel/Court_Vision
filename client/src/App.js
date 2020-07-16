@@ -24,7 +24,6 @@ function App() {
     // set current user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
   }
-  
     return ( 
       <Provider store={store}>
         <Router>
@@ -39,9 +38,9 @@ function App() {
               <Route exact path='/team/:teamID' component= { Team } />
               <Route exact path='/leagueleaders' component= {LeagueLeaders} />
             </div>
-        </div>
-      </Router>
-    </Provider>
+          </div>
+        </Router>
+      </Provider>
   );
 }
 
