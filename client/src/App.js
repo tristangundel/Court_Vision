@@ -24,21 +24,20 @@ function App() {
     // set current user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
   }
-  
-    return ( 
-      <Provider store={store}>
-        <Router>
-          <div className = 'App' >
-            <NavBar />
-            <Route exact path='/' component={ HomePage } />
-            <div id='container'>
-              <Route exact path='/register' component={ Register } />
-              <Route exact path='/login' component={ Login } />
-              <Route exact path='/testplayer' component= { Player } />
-              <Route exact path='/player/:playerID' component= { Player } />
-              <Route exact path='/team/:teamID' component= { Team } />
-              <Route exact path='/leagueleaders' component= {LeagueLeaders} />
-            </div>
+
+  return ( 
+    <Provider store={store}>
+      <Router>
+        <div className = 'App' >
+          <NavBar />
+          <Route exact path='/' component={ HomePage } />
+          <div id='container'>
+            <Route exact path='/register' component={ Register } />
+            <Route exact path='/login' component={ Login } />
+            <Route exact path='/testplayer' component= { Player } />
+            <Route exact path='/player/:playerID' component= { Player } />
+            <Route exact path='/team/:teamID' component= { Team } />
+            <Route exact path='/leagueleaders' component= {LeagueLeaders} />
           </div>
         </div>
       </Router>
