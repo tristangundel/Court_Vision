@@ -18,8 +18,8 @@ function getTeamInfo(teamKeys, key) {
     return nba.teamDetails({TeamID: nba.getTeamID(teamKeys[key]).TeamID})
 };
 
-function getTeamLogo(teamKeys, key) {
-    return nba.getTeamLogoURLs(teamKeys[key])[0];
+function getTeamLogo(key) {
+    return nba.getTeamLogoURLs(key)[0];
 }
 
 function getTeam(teamKeys, key, res) {
@@ -28,7 +28,7 @@ function getTeam(teamKeys, key, res) {
             res.send({
                 Roster: rosterData,
                 Info: infoData,
-                Logo: getTeamLogo(teamKeys, key)
+                Logo: getTeamLogo(key)
             });
         })
         .catch((infoError) => console.log(infoError))

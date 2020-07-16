@@ -36,7 +36,8 @@ function App() {
               <Route exact path='/register' component={ Register } />
               <Route exact path='/login' component={ Login } />
               <Route exact path='/testplayer' component= { Player } />
-              <Route path='/team/:teamId' component= { Team } />
+              <Route exact path='/player/:playerID' component= { Player } />
+              <Route exact path='/team/:teamID' component= { Team } />
               <Route exact path='/leagueleaders' component= {LeagueLeaders} />
             </div>
           </div>

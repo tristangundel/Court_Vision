@@ -31,12 +31,12 @@ class Team extends React.Component {
     }
     
     componentDidMount() {
-        this.getInfo(this.props.match.params.teamId);
+        this.getInfo(this.props.match.params.teamID);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.id !== nextProps.match.params.teamId) {
-            this.getInfo(nextProps.match.params.teamId);
+        if (this.state.id !== nextProps.match.params.teamID) {
+            this.getInfo(nextProps.match.params.teamID);
         }
     }
 
