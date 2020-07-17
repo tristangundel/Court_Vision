@@ -4,7 +4,8 @@ import setAuthToken from '../../utils/setAuthToken';
 import { GET_ERRORS, SET_CURRENT_USER } from './actionTypes';
 
 // Register User
-export const registerUser = (userData, history) => (dispatch) =>{
+export const registerUser = (userData, history) => dispatch =>{
+    console.log(userData);
     axios.post('/api/users', userData)
         .then( res => {
             // if call is successful then redirect to the login page
@@ -21,7 +22,7 @@ export const registerUser = (userData, history) => (dispatch) =>{
 
 // action to log in a user and then set current user 
 export const loginUser = (userData, history) => dispatch => {
-    axios.post('api/auth', userData)
+    axios.post('/api/auth', userData)
         .then(res => {
             // save token to local storage
             const { token } = res.data;

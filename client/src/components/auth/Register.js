@@ -42,7 +42,7 @@ class Register extends React.Component {
         event.preventDefault();
         const newUser = {
             email: this.state.email,
-            name: this.state.username,
+            name: this.state.name,
             password: this.state.password,
             confirmPass: this.state.confirmPass
         }
@@ -74,7 +74,7 @@ class Register extends React.Component {
                                 type="text"
                                 placeholder="Name"
                                 name="name"
-                                value={this.state.username}
+                                value={this.state.name}
                                 onChange={this.handleChange}
                                 required
                             />
@@ -110,7 +110,7 @@ class Register extends React.Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
+    auth: PropTypes.object,
     errors: PropTypes.object.isRequired
 }
 
