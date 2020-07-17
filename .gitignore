@@ -1,8 +1,10 @@
 // dependency directories
 server/node_modules
+node_modules
 
 // MongoDB info 
-server/config
+server/config/default.json
+config/default.json
 
 //env 
 .env
