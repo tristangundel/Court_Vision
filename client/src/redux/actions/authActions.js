@@ -5,7 +5,6 @@ import { GET_ERRORS, SET_CURRENT_USER } from './actionTypes';
 
 // Register User
 export const registerUser = (userData, history) => dispatch =>{
-    console.log(userData);
     axios.post('/api/users', userData)
         .then( res => {
             // if call is successful then redirect to the login page
