@@ -70,14 +70,10 @@ router.post(
           id: user.id,
         },
       };
-      if (process.env.NODE_ENV === 'production') {
-        const jwtSecret = process.env.JWT_SECRET;
-      } else {
-        const jwtSecret = config.get('jwtSecret');
-      }
+
       jwt.sign(
         payload,
-        jwtSecret,
+        (process.env.JWT_SECRET || config.get('jwtSecret')),
         // expiration is optional, but recommended.
         // here it is set to long time because we are testing
         { expiresIn: 360000 },
