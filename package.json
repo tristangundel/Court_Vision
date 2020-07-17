@@ -4,11 +4,12 @@
     "description": "Court Vision is a web based application for users to see statistics about their favorite players in the NBA with easy to follow visualizations. Basketball data will be scraped via the stats.nba.com API and dynamically displayed to the user. Users will be able to make informed decisions in fantasy leagues as well as wagers. (Oregon State University - CS467 Capstone Project)",
     "main": "app.js",
     "scripts": {
-        "start": "node server",
-        "server": "nodemon server",
+        "start": "node app.js",
+        "server": "nodemon app.js",
         "start-watch": "nodemon app.js",
         "dev": "concurrently \"npm run start-watch\" \"cd ../client && npm run start\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
     },
     "repository": {
         "type": "git",
@@ -21,34 +22,17 @@
     },
     "homepage": "https://github.com/tristangundel/Court_Vision#readme",
     "dependencies": {
-        "@testing-library/jest-dom": "^4.2.4",
-        "@testing-library/react": "^9.3.2",
-        "@testing-library/user-event": "^7.1.2",
         "axios": "^0.19.2",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.19.0",
-        "bootstrap": "^4.5.0",
-        "classname": "0.0.0",
         "config": "^3.3.1",
         "express": "^4.17.1",
         "express-validator": "^6.6.0",
         "jsonwebtoken": "^8.5.1",
-        "jwt-decode": "^2.2.0",
         "mongoose": "^5.9.21",
         "nba-api-client": "^1.1.0",
-        "prop-types": "^15.7.2",
-        "react": "^16.13.1",
-        "react-bootstrap": "^1.0.1",
-        "react-dom": "^16.13.1",
-        "react-icons": "^3.10.0",
         "react-loader-spinner": "^3.1.14",
-        "react-redux": "^7.2.0",
-        "react-router-dom": "^5.2.0",
-        "react-scripts": "3.4.1",
-        "redux": "^4.0.5",
-        "redux-thunk": "^2.3.0",
-        "request": "^2.88.2",
-        "serve": "^11.3.2"
+        "request": "^2.88.2"
     },
     "devDependencies": {
         "concurrently": "^5.2.0",
