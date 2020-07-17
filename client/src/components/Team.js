@@ -2,6 +2,20 @@ import React from 'react';
 import Loader from 'react-loader-spinner';
 const axios = require('axios');
 
+const getRank = (rank) => {
+    const digit = rank%10;
+    switch(digit) {
+        case 1:
+            return `${rank}st`;
+        case 2:
+            return `${rank}nd`;
+        case 3:
+            return `${rank}rd`;
+        default:
+            return `${rank}th`;
+    }
+}
+
 class Team extends React.Component {
 
     constructor() {
@@ -26,6 +40,7 @@ class Team extends React.Component {
                 logo: results.data.Logo,
                 id: ID
             });
+            console.log(this.state.teamInfo);
         })
         .catch((error) => {
             console.log(error);
@@ -36,12 +51,25 @@ class Team extends React.Component {
         this.getInfo(this.props.match.params.teamID);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         if (this.state.id !== nextProps.match.params.teamID) {
             this.getInfo(nextProps.match.params.teamID);
         }
     }
 
+    getRank(rank) {
+        switch(this.state.teamInfo.CONF_RANK.charAt(this.state.teamIndo.CONF_RANK.length-1)) {
+            case 1:
+                return `${this.state.teamInfo.CONF_RANK}st`;
+            case 2:
+                return `${this.state.teamInfo.CONF_RANK}nd`;
+            case 3:
+                return `${this.state.teamInfo.CONF_RANK}rd`;
+            default:
+                return `${this.state.teamInfo.CONF_RANK}th`;
+        }
+    }
+    
     render() {
         let roster = [];
         for (var key in this.state.playersInfo){
@@ -68,13 +96,13 @@ class Team extends React.Component {
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
-                                        {`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}
+                                        {`${this.state.teamInfo.TEAM_CITY} ${this.state.teamInfo.TEAM_NAME}`}
                                     </h1>
                                     <div className="row">
                                         <div className="col-3">
                                             <div>2019-20 Season </div>
                                             <div>{this.state.teamInfo.W}-{this.state.teamInfo.L} ({this.state.teamInfo.PCT})</div>
-                                            <div>{this.state.teamInfo.CONF_RANK} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
+                                            <div> {getRank(this.state.teamInfo.CONF_RANK)} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
@@ -86,7 +114,7 @@ class Team extends React.Component {
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>APG</h2>
-                                            <h3>{this.state.seasonRanks.ASTPTS_RANK}</h3>
+                                            <h3>{this.state.seasonRanks.AST_RANK}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>OPG</h2>

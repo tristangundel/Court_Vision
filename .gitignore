@@ -1,5 +1,6 @@
 // dependency directories
 server/node_modules
+!server/node_modules/nba-api-client/**
 
 // MongoDB info 
 server/config
