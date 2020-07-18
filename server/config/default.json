@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://arizala13:tdvCgMxxDeYkp6r@court-vision-1.etpes.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "courtVisionSecret",
+  "RAPIDAPI_KEY-ANDRES": "1d986d96b2mshcfa4699b951db8dp18f1c1jsnf23ca1ff6131",
+  "RAPIDAPI_KEY": "15d0eb1184msh186b51c64364e79p1d0c5djsne13b025f158e"
+}
