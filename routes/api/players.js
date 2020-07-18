@@ -30,11 +30,15 @@ function getPlayer(ID, res) {
             });
         })
         .catch((statError) => {
+            res.status(500);
             console.log(statError);
+            res.send({Error: statError.Error});
         });
     })
     .catch((infoError) => {
+        res.status(500);
         console.log(infoError);
+        res.send({Error: infoError.Error});
     });
 }
 

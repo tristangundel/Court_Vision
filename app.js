@@ -2,6 +2,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // assign variables for port and application's server
 const app = express();
@@ -12,6 +13,7 @@ connectDB();
 // init middleware
 app.use(express.json({ extended: false }));
 app.use(express.static('./utils'));
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Define routes
 app.use("/api/users", require("./routes/api/users"));

@@ -19,19 +19,23 @@ class Team extends React.Component {
     getInfo(ID) {
         axios.get(`/api/teams/${ID}`)
         .then((results) => {
-            this.setState({
-                teamInfo: results.data.Info.TeamInfoCommon, 
-                seasonRanks: results.data.Info.TeamSeasonRanks,
-                playersInfo: results.data.Roster.CommonTeamRoster,
-                logo: results.data.Logo,
-                id: ID
-            });
+            if (results.Error){
+                console.log("ERROR");
+            } else {
+                this.setState({
+                    teamInfo: results.data.Info.TeamInfoCommon,
+                    seasonRanks: results.data.Info.TeamSeasonRanks,
+                    playersInfo: results.data.Roster.CommonTeamRoster,
+                    logo: results.data.Logo,
+                    id: ID
+                });
+            }
         })
         .catch((error) => {
             console.log(error);
         });
     }
-    
+
     componentDidMount() {
         this.getInfo(this.props.match.params.teamID);
     }
@@ -57,18 +61,18 @@ class Team extends React.Component {
                 </tr>
             ))
         }
-        if (!(Object.keys(this.state.teamInfo).length === 0) && typeof(this.state.teamInfo) === "object") {
+        if (typeof(this.state.teamInfo) === "object" && !(Object.keys(this.state.teamInfo).length === 0) ) {
             return (
                 <div className="player justify-content-center">
                     <div className="text-light">
                         <div className="container  dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.logo } alt={`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}></img>
+                                    <img height='250px' src={ this.state.logo } alt={`${this.state.teamInfo.TEAM_CITY} ${this.state.teamInfo.TEAM_NAME}`}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
-                                        {`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}
+                                        {`${this.state.teamInfo.TEAM_CITY} ${this.state.teamInfo.TEAM_NAME}`}
                                     </h1>
                                     <div className="row">
                                         <div className="col-3">
@@ -86,12 +90,12 @@ class Team extends React.Component {
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>APG</h2>
-                                            <h3>{this.state.seasonRanks.ASTPTS_RANK}</h3>
+                                            <h3>{this.state.seasonRanks.AST_RANK}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>OPG</h2>
                                             <h3>{this.state.seasonRanks.OPP_PTS_RANK}</h3>
-                                        </div>   
+                                        </div>
                                     </div>
                                 </div>
                             </div>
