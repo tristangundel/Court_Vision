@@ -1,6 +1,10 @@
 // dependency directories
 server/node_modules
+<<<<<<< HEAD
 node_modules
+=======
+!server/node_modules/nba-api-client/**
+>>>>>>> a0442c6b98e82abbb7a463f132e89b641ac99efc
 
 // MongoDB info 
 server/config/default.json
