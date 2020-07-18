@@ -1,9 +1,9 @@
 // dependency directories
-server/node_modules
-!server/node_modules/nba-api-client/**
+node_modules
+!node_modules/nba-api-client/**
 
 // MongoDB info 
-server/config
+config/default.json
 
 //env 
 .env
