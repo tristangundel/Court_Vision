@@ -94,6 +94,7 @@ class NavBar extends React.Component {
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
+                    <i className="fas fa-basketball-ball text-light fa-2x mr-2"></i>
                     <Link className="navbar-brand" to="/">CourtVision</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                         <span className="navbar-toggler-icon"></span>
@@ -117,7 +118,7 @@ class NavBar extends React.Component {
                                 <Link className="nav-link" to="/leagueleaders">League Leaders</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/testplayer">Test Player</Link>
+                            <Link className="nav-link" to="/player/James%20Harden">Test Player</Link>
                             </li>
                         </ul>
                         {isAuthenticated ? loggedInLinks : guestLinks}

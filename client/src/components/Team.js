@@ -2,6 +2,20 @@ import React from 'react';
 import Loader from 'react-loader-spinner';
 const axios = require('axios');
 
+const getRank = (rank) => {
+    const digit = rank%10;
+    switch(digit) {
+        case 1:
+            return `${rank}st`;
+        case 2:
+            return `${rank}nd`;
+        case 3:
+            return `${rank}rd`;
+        default:
+            return `${rank}th`;
+    }
+}
+
 class Team extends React.Component {
 
     constructor() {
@@ -13,6 +27,7 @@ class Team extends React.Component {
             logo: "",
             id: ""
         };
+        console.log(this.state.teamInfo);
         this.getInfo = this.getInfo.bind(this);
     }
 
@@ -40,11 +55,25 @@ class Team extends React.Component {
         this.getInfo(this.props.match.params.teamID);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(nextProps) {
         if (this.state.id !== nextProps.match.params.teamID) {
             this.getInfo(nextProps.match.params.teamID);
         }
     }
+
+    getRank(rank) {
+        switch(this.state.teamInfo.CONF_RANK.charAt(this.state.teamIndo.CONF_RANK.length-1)) {
+            case 1:
+                return `${this.state.teamInfo.CONF_RANK}st`;
+            case 2:
+                return `${this.state.teamInfo.CONF_RANK}nd`;
+            case 3:
+                return `${this.state.teamInfo.CONF_RANK}rd`;
+            default:
+                return `${this.state.teamInfo.CONF_RANK}th`;
+        }
+    }
+
 
     render() {
         let roster = [];
@@ -78,7 +107,7 @@ class Team extends React.Component {
                                         <div className="col-3">
                                             <div>2019-20 Season </div>
                                             <div>{this.state.teamInfo.W}-{this.state.teamInfo.L} ({this.state.teamInfo.PCT})</div>
-                                            <div>{this.state.teamInfo.CONF_RANK} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
+                                            <div>{getRank(this.state.teamInfo.CONF_RANK)} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
