@@ -1,6 +1,7 @@
 // declare variables for dependencies
 const express = require("express");
 const bodyParser = require('body-parser');
+const path = require('path');
 const connectDB = require("./config/db");
 
 // assign variables for port and application's server
