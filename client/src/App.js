@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+// 2 below are for redux
 import { Provider } from "react-redux";
+import store from "./redux/store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser } from "./redux/actions/authActions";
-import store from "./redux/store";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
@@ -24,23 +25,23 @@ function App() {
     // set current user and isAuthenticated
     store.dispatch(setCurrentUser(decoded));
   }
-    return ( 
-      <Provider store={store}>
-        <Router>
-          <div className = 'App' >
-            <NavBar />
-            <Route exact path='/' component={ HomePage } />
-            <div id='container'>
-              <Route exact path='/register' component={ Register } />
-              <Route exact path='/login' component={ Login } />
-              <Route exact path='/testplayer' component= { Player } />
-              <Route exact path='/player/:playerID' component= { Player } />
-              <Route exact path='/team/:teamID' component= { Team } />
-              <Route exact path='/leagueleaders' component= {LeagueLeaders} />
-            </div>
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className='App'>
+          <NavBar />
+          <Route exact path='/' component={HomePage} />
+          <div id='container'>
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/testplayer' component={Player} />
+            <Route exact path='/player/:playerID' component={Player} />
+            <Route exact path='/team/:teamID' component={Team} />
+            <Route exact path='/leagueleaders' component={LeagueLeaders} />
           </div>
-        </Router>
-      </Provider>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
