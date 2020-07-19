@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+//below gets rid of DeprecationWarning: Mongoose: `findOneAndUpdate()`
+mongoose.set("useFindAndModify", false);
 
 // every profile will be associated with a user so we refrence that
 const ProfileSchema = new mongoose.Schema({

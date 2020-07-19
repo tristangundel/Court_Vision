@@ -28,7 +28,7 @@ router.get("/me", auth, async (req, res) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send("Server Error -- in /me get");
   }
 });
 
@@ -68,18 +68,31 @@ router.post(
     if (status) profileFields.website = status;
     if (team) profileFields.team = team;
     if (location) profileFields.location = location;
-    if (youtube) profileFields.youtube = youtube;
-    if (twitter) profileFields.twitter = twitter;
-    if (instagram) profileFields.instagram = instagram;
 
     // We can use an array to save favorite players
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
 
-    console.log(skills);
+    // Build social object
+    profileFields.social = {};
+    if (youtube) profileFields.social.youtube = youtube;
+    if (twitter) profileFields.social.twitter = twitter;
+    if (instagram) profileFields.social.instagram = instagram;
 
-    res.send("Hello");
+    // look for profile
+    try {
+      // Using upsert option (creates new doc if no match is found):
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error -- / post ");
+    }
   }
 );
 
