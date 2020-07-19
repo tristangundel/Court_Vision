@@ -3,6 +3,9 @@ import Loader from 'react-loader-spinner';
 const axios = require('axios');
 
 const getRank = (rank) => {
+    if (rank >= 10 && rank <= 20) {
+        return `${rank}th`;
+    }
     const digit = rank%10;
     switch(digit) {
         case 1:
@@ -57,18 +60,18 @@ class Team extends React.Component {
         }
     }
 
-    getRank(rank) {
-        switch(this.state.teamInfo.CONF_RANK.charAt(this.state.teamIndo.CONF_RANK.length-1)) {
-            case 1:
-                return `${this.state.teamInfo.CONF_RANK}st`;
-            case 2:
-                return `${this.state.teamInfo.CONF_RANK}nd`;
-            case 3:
-                return `${this.state.teamInfo.CONF_RANK}rd`;
-            default:
-                return `${this.state.teamInfo.CONF_RANK}th`;
-        }
-    }
+    // getRank(rank) {
+    //     switch(this.state.teamInfo.CONF_RANK.charAt(this.state.teamIndo.CONF_RANK.length-1)) {
+    //         case 1:
+    //             return `${this.state.teamInfo.CONF_RANK}st`;
+    //         case 2:
+    //             return `${this.state.teamInfo.CONF_RANK}nd`;
+    //         case 3:
+    //             return `${this.state.teamInfo.CONF_RANK}rd`;
+    //         default:
+    //             return `${this.state.teamInfo.CONF_RANK}th`;
+    //     }
+    // }
     
     render() {
         let roster = [];
@@ -106,19 +109,19 @@ class Team extends React.Component {
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
-                                            <h3>{this.state.seasonRanks.PTS_RANK}</h3>
+                                            <h3>{getRank(this.state.seasonRanks.PTS_RANK)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>RPG</h2>
-                                            <h3>{this.state.seasonRanks.REB_RANK}</h3>
+                                            <h3>{getRank(this.state.seasonRanks.REB_RANK)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>APG</h2>
-                                            <h3>{this.state.seasonRanks.AST_RANK}</h3>
+                                            <h3>{getRank(this.state.seasonRanks.AST_RANK)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
-                                            <h2>OPG</h2>
-                                            <h3>{this.state.seasonRanks.OPP_PTS_RANK}</h3>
+                                            <h2>OPPG</h2>
+                                            <h3>{getRank(this.state.seasonRanks.OPP_PTS_RANK)}</h3>
                                         </div>   
                                     </div>
                                 </div>
