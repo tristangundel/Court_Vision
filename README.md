@@ -5,10 +5,9 @@ Court Vision is a web based application for users to see statistics about their 
 Server runs at port 5000, client runs at port 3000. \
 To start: \
 run "npm install" in client directory \
-run "npm install" in server directory \
-run "npm run dev" in server directory to run both server and client \
+run "npm run dev" in root directory to run both server and client
 
-With "npm run server" and nodemon set to run it will refresh automatically as you make updates and save changes!
+With "npm run dev"" and nodemon set to run it will refresh automatically as you make updates and save changes!
 
 Tools used within project:
 
@@ -34,3 +33,7 @@ Dev Dependencies:
 
 - nodemon - watches server to refresh as we update
 - concurrently - can see run backend and frontend on one single command
+
+NBA stats API:
+
+- [nba-api-client](https://www.npmjs.com/package/nba-api-client)
