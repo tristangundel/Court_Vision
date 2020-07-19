@@ -4,12 +4,13 @@
     "description": "Court Vision is a web based application for users to see statistics about their favorite players in the NBA with easy to follow visualizations. Basketball data will be scraped via the stats.nba.com API and dynamically displayed to the user. Users will be able to make informed decisions in fantasy leagues as well as wagers. (Oregon State University - CS467 Capstone Project)",
     "main": "app.js",
     "scripts": {
-        "start": "node app.js",
+        "start": "NODE_ENV=production npm run client-build && node app.js",
         "server": "nodemon app.js",
         "start-watch": "nodemon app.js",
         "dev": "concurrently \"npm run start-watch\" \"cd client && npm run start\"",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+        "client-build": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
     },
     "repository": {
         "type": "git",
