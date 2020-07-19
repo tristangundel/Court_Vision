@@ -96,4 +96,61 @@ router.post(
   }
 );
 
+// @route       Get api/profile
+// @desc        get all profiles
+// @access      public
+router.get("/", async (req, res) => {
+  try {
+    // Get users names, can add more here if want/need
+    const profiles = await Profile.find().populate("user", ["name"]);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route       Get api/profile/user/:user_id
+// @desc        get profile by user ID
+// @access      public
+router.get("/user/:user_id", async (req, res) => {
+  try {
+    // Get users names, can add more here if want/need
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate("user", ["name"]);
+
+    // checks to make sure that their is profile for suer
+    if (!profile) return res.status(400).json({ msg: "Profile not found" });
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profile not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route       Delete api/profile
+// @desc        delete profile, user and post
+// @access      private
+router.delete("/", auth, async (req, res) => {
+  try {
+    // remove profile, auth needed because token is needed
+    // TODO: add removing user posts
+    await Profile.findOneAndRemove({ user: req.user.id });
+
+    // removes user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    //Returns message
+    res.json({ msg: "User has been removed" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
