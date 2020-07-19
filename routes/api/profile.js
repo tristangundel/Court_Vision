@@ -45,18 +45,28 @@ router.post(
     ],
   ],
   async (req, res) => {
-    const errors = validtionResult(req);
+    const errors = validationResult(req);
 
     //check for errors
-    if (!error.isEmpty()) {
+    if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    const {
+      status,
+      skills,
+      team,
+      location,
+      youtube,
+      twitter,
+      instagram,
+    } = req.body;
 
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (team) profileFields.team = team;
     if (status) profileFields.website = status;
+    if (team) profileFields.team = team;
     if (location) profileFields.location = location;
     if (youtube) profileFields.youtube = youtube;
     if (twitter) profileFields.twitter = twitter;
