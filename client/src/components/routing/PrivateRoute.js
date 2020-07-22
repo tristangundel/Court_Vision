@@ -3,6 +3,8 @@ import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+// Private route will protect routes that are allowed only for logged in users
+
 const PrivateRoute = ({
   component: Component,
   auth: { isAuthenticated, loading },
