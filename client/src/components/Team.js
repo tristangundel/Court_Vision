@@ -24,9 +24,9 @@ class Team extends React.Component {
     constructor() {
         super();
         this.state = {
-            teamInfo: {},
-            seasonRanks: {},
-            playersInfo: [],
+            stats: {},
+            standings: {},
+            roster: [],
             logo: "",
             id: ""
         };
@@ -37,9 +37,9 @@ class Team extends React.Component {
         axios.get(`/api/teams/${ID}`)
         .then((results) => {
             this.setState({
-                teamInfo: results.data.Info.TeamInfoCommon, 
-                seasonRanks: results.data.Info.TeamSeasonRanks,
-                playersInfo: results.data.Roster.CommonTeamRoster,
+                stats: results.data.Stats, 
+                standings: results.data.Standings,
+                roster: results.data.Roster,
                 logo: results.data.Logo,
                 id: ID
             });
@@ -75,53 +75,53 @@ class Team extends React.Component {
     
     render() {
         let roster = [];
-        for (var key in this.state.playersInfo){
+        for (let i = 0; i < this.state.roster.length; i++){
             roster.push((
-                <tr key={this.state.playersInfo[key].PLAYER}>
-                    <td>{this.state.playersInfo[key].PLAYER}</td>
-                    <td>{this.state.playersInfo[key].NUM}</td>
-                    <td>{this.state.playersInfo[key].POSITION}</td>
-                    <td>{this.state.playersInfo[key].HEIGHT}</td>
-                    <td>{this.state.playersInfo[key].WEIGHT}</td>
-                    <td>{this.state.playersInfo[key].AGE}</td>
-                    <td>{this.state.playersInfo[key].SCHOOL}</td>
+                <tr key={this.state.roster[i].name}>
+                    <td>{this.state.roster[i].name}</td>
+                    <td>{this.state.roster[i].number}</td>
+                    <td>{this.state.roster[i].position}</td>
+                    <td>{this.state.roster[i].height}</td>
+                    <td>{this.state.roster[i].weight}</td>
+                    <td>{this.state.roster[i].age}</td>
+                    <td>{this.state.roster[i].school}</td>
                 </tr>
             ))
         }
-        if (!(Object.keys(this.state.teamInfo).length === 0) && typeof(this.state.teamInfo) === "object") {
+        if (!(Object.keys(this.state.stats).length === 0) && typeof(this.state.stats) === "object") {
             return (
                 <div className="player justify-content-center">
                     <div className="text-light">
                         <div className="container  dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.logo } alt={`${this.state.teamInfo.CITY} ${this.state.teamInfo.NICKNAME}`}></img>
+                                    <img height='250px' src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
-                                        {`${this.state.teamInfo.TEAM_CITY} ${this.state.teamInfo.TEAM_NAME}`}
+                                        {`${this.state.standings.name}`}
                                     </h1>
                                     <div className="row">
                                         <div className="col-3">
                                             <div>2019-20 Season </div>
-                                            <div>{this.state.teamInfo.W}-{this.state.teamInfo.L} ({this.state.teamInfo.PCT})</div>
-                                            <div> {getRank(this.state.teamInfo.CONF_RANK)} in {this.state.teamInfo.TEAM_CONFERENCE}ern Conference</div>
+                                            <div>{this.state.standings.W}-{this.state.standings.L} ({this.state.standings.PCT})</div>
+                                            <div> {getRank(this.state.standings.rank)} in {this.state.standings.conference}</div>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>PPG</h2>
-                                            <h3>{getRank(this.state.seasonRanks.PTS_RANK)}</h3>
+                                            <h3>{getRank(this.state.stats.ppg)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>RPG</h2>
-                                            <h3>{getRank(this.state.seasonRanks.REB_RANK)}</h3>
+                                            <h3>{getRank(this.state.stats.rpg)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>APG</h2>
-                                            <h3>{getRank(this.state.seasonRanks.AST_RANK)}</h3>
+                                            <h3>{getRank(this.state.stats.apg)}</h3>
                                         </div>
                                         <div className="col-2 text-center">
                                             <h2>OPPG</h2>
-                                            <h3>{getRank(this.state.seasonRanks.OPP_PTS_RANK)}</h3>
+                                            <h3>{getRank(this.state.stats.oppg)}</h3>
                                         </div>   
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@ class Team extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.playersInfo.length === 0 ? null : roster}
+                                        {this.state.roster.length === 0 ? null : roster}
                                     </tbody>
                                 </table>
                             </div>
