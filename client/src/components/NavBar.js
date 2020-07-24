@@ -118,7 +118,7 @@ class NavBar extends React.Component {
                                 <Link className="nav-link" to="/leagueleaders">League Leaders</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/player/James%20Harden">Test Player</Link>
+                                <Link className="nav-link" to="/player/Stephen%20Curry">Test Player</Link>
                             </li>
                         </ul>
                         {isAuthenticated ? loggedInLinks : guestLinks}
