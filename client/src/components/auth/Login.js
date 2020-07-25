@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Container, Row, Form, Button } from "react-bootstrap";
 import { GiBasketballBall } from "react-icons/gi";
@@ -46,6 +46,11 @@ class Login extends React.Component {
     };
 
     this.props.loginUser(userData, this.props.history);
+  }
+
+  // if user is authenticated we redirect to the dashboard
+  if(auth) {
+    return <Redirect to='/dashboard' />;
   }
 
   render() {
