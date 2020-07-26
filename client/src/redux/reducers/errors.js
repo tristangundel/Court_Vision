@@ -1,16 +1,16 @@
-import { GET_ERRORS } from '../actions/actionTypes';
+import { GET_ERRORS, REMOVE_ALERT } from "../actions/actionTypes";
 
-// initial state of errors is set to empty object
-const initialState = {};
+const initialState = [];
 
-// used with redux to retrieve errors and return them to local storage
-const errorReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_ERRORS: 
-            return action.payload;
-        default:
-            return state;
-    }
-};
+export default function (state = initialState, action) {
+  const { type, payload } = action;
 
-export default errorReducer;
+  switch (type) {
+    case GET_ERRORS:
+      return [...state, payload];
+    case REMOVE_ALERT:
+      return state.filter((alert) => alert.id !== payload);
+    default:
+      return state;
+  }
+}
