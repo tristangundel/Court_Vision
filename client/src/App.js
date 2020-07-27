@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // 2 below are for redux
 import { Provider } from "react-redux";
 import store from "./redux/store";
@@ -10,6 +10,7 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import Dashboard from "./components/dashboard/Dashboard";
+import PrivateRoute from "./components/routing/PrivateRoute";
 // import Footer from './components/Footer';
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -33,13 +34,15 @@ function App() {
           <NavBar />
           <Route exact path='/' component={HomePage} />
           <div id='container'>
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/testplayer' component={Player} />
-            <Route exact path='/player/:playerID' component={Player} />
-            <Route exact path='/team/:teamID' component={Team} />
-            <Route exact path='/leagueleaders' component={LeagueLeaders} />
+            <Switch>
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/login' component={Login} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <Route exact path='/testplayer' component={Player} />
+              <Route exact path='/player/:playerID' component={Player} />
+              <Route exact path='/team/:teamID' component={Team} />
+              <Route exact path='/leagueleaders' component={LeagueLeaders} />
+            </Switch>
           </div>
         </div>
       </Router>
