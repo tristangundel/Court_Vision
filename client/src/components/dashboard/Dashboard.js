@@ -3,14 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../redux/actions/profile";
 
-const Dashboard = ({
-  getCurrentProfile,
-  auth: { user },
-  profile: { profile },
-}) => {
+const Dashboard = ({ getCurrentProfile, auth, profile }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+  }, []);
 
   return (
     <Fragment>
