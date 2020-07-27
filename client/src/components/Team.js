@@ -1,5 +1,6 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 const getRank = (rank) => {
@@ -43,7 +44,7 @@ class Team extends React.Component {
                 logo: results.data.Logo,
                 id: ID
             });
-            console.log(this.state.teamInfo);
+            // console.log(this.state.teamInfo);
         })
         .catch((error) => {
             console.log(error);
@@ -51,34 +52,38 @@ class Team extends React.Component {
     }
     
     componentDidMount() {
+        console.log("Mounting!");
         this.getInfo(this.props.match.params.teamID);
+
     }
 
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.match.params.teamID !== prevState.id){
+            return {stats: {}};
+        } 
+        else {
+            return null;
+        }
+     }
+
     componentDidUpdate(nextProps) {
-        if (this.state.id !== nextProps.match.params.teamID) {
+        if ((Object.keys(this.state.stats).length === 0) && typeof(this.state.stats) === "object") {
             this.getInfo(nextProps.match.params.teamID);
         }
     }
-
-    // getRank(rank) {
-    //     switch(this.state.teamInfo.CONF_RANK.charAt(this.state.teamIndo.CONF_RANK.length-1)) {
-    //         case 1:
-    //             return `${this.state.teamInfo.CONF_RANK}st`;
-    //         case 2:
-    //             return `${this.state.teamInfo.CONF_RANK}nd`;
-    //         case 3:
-    //             return `${this.state.teamInfo.CONF_RANK}rd`;
-    //         default:
-    //             return `${this.state.teamInfo.CONF_RANK}th`;
-    //     }
-    // }
     
     render() {
         let roster = [];
         for (let i = 0; i < this.state.roster.length; i++){
             roster.push((
                 <tr key={this.state.roster[i].name}>
-                    <td>{this.state.roster[i].name}</td>
+                    <td>
+                        <Link 
+                            to={`/player/${this.state.roster[i].name}`} 
+                            style={{textDecoration: "none", color: "white"}}
+                            >{this.state.roster[i].name}
+                        </Link>
+                    </td>
                     <td>{this.state.roster[i].number}</td>
                     <td>{this.state.roster[i].position}</td>
                     <td>{this.state.roster[i].height}</td>
@@ -92,7 +97,7 @@ class Team extends React.Component {
             return (
                 <div className="player justify-content-center">
                     <div className="text-light">
-                        <div className="container  dark-overlay center">
+                        <div className="container mx-5 dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
                                     <img height='250px' src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
@@ -150,7 +155,15 @@ class Team extends React.Component {
                 </div>
             )
         } else {
-            return(<Loader />);
+            return(
+                <div className="player justify-content-center">
+                    <div className="text-light">
+                        <div className="container  dark-overlay center">
+                            <Loader />
+                        </div>
+                    </div>
+                </div>
+            );
         }
     }
 }

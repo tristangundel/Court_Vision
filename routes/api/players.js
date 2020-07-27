@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 const cheerio = require('cheerio');
+const playerKey = require('../../utils/playerKey')
 // const nba = require('nba-api-client');
 // const nbaGetData = require('../../utils/nbaStats');
 // const formatData = require('../../utils/formatData');
@@ -12,7 +13,7 @@ const cheerio = require('cheerio');
 router.get("/:playerID", (req, res) => {
     //const regex = /%20/g;
     //const ID = nba.getPlayerID(req.params.playerID.replace(regex, " ")).PlayerID;
-    getPlayer(3975, res);
+    getPlayer(playerKey[req.params.playerID], res);
 
 });
 
