@@ -5,7 +5,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Container, Row, Form, Button } from "react-bootstrap";
 import { GiBasketballBall } from "react-icons/gi";
-import { loginUser, GET_ERRORS } from "../../redux/actions/authActions";
+import { loginUser } from "../../redux/actions/authActions";
 
 class Login extends React.Component {
   constructor() {

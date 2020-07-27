@@ -1,14 +1,22 @@
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../redux/actions/profile";
 
-const Dashboard = ({ getCurrentProfile, auth, profile }) => {
+const Dashboard = ({
+  getCurrentProfile,
+  auth: { user },
+  profile: { profile },
+}) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
-  return <div>Dashboard</div>;
+  return (
+    <Fragment>
+      <h1>This is where the Dashboard will be</h1>
+    </Fragment>
+  );
 };
 
 Dashboard.propTypes = {
