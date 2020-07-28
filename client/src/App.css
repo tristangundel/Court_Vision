@@ -75,3 +75,42 @@ img {
 Form Button {
     width: 100%;
 }
+
+.search {
+    display: block;
+    width: 300px;
+}
+
+.search-box {
+    width: 85%;
+}
+
+.search-container {
+    width: 250px;
+    z-index: 1040;
+    max-height: 35px;
+    overflow-y: visible;
+}
+
+.navbar {
+    overflow-y: visible;
+}
+
+.options {
+    list-style: none;
+    background-color: white;
+    width: 85%;
+    padding: 0px;
+}
+
+.options li {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 2px;
+}
+
+.search-button i {
+    padding: 0;
+    color: white;
+    margin-left: 10px;
+}

@@ -1,4 +1,3 @@
-const playerKey = require("../../../utils/playerKey");
 
 const playerList = [
     "Will Barton",
@@ -134,7 +133,6 @@ const playerList = [
     "Michael Frazier",
     "James Ennis III",
     "Bryn Forbes",
-    "Anthony Davis",
     "Spencer Dinwiddie",
     "Kawhi Leonard",
     "Kris Dunn",
