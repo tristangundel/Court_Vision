@@ -1,7 +1,7 @@
 import React from "react";
 // import { Container, Col, Row } from 'react-bootstrap';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Link, Redirect, withRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
@@ -12,7 +12,7 @@ class HomePage extends React.Component {
     const { isAuthenticated } = this.props.auth;
 
     if (isAuthenticated) {
-      return (<Redirect to="/dashboard" />);
+      return <Redirect to='/dashboard' />;
     } else {
       return (
         <div className='landing'>
@@ -39,11 +39,11 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  auth: PropTypes.object
-}
+  auth: PropTypes.object,
+};
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps)(withRouter(HomePage) )
+export default connect(mapStateToProps)(withRouter(HomePage));

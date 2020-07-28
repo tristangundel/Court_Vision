@@ -6,7 +6,7 @@ import { getCurrentProfile } from "../../redux/actions/profile";
 const Dashboard = ({ getCurrentProfile, auth, profile }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   return (
     <Fragment>
