@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../redux/actions/profile";
@@ -6,8 +7,11 @@ import { getCurrentProfile } from "../../redux/actions/profile";
 const Dashboard = ({ getCurrentProfile, auth: { user } }) => {
   useEffect(() => {
     getCurrentProfile();
-    console.log(user);
-  }, [getCurrentProfile]);
+    console.log("This next one is the axios.defaults In getCurrentProfile");
+    console.log(axios.defaults.headers.common["x-auth-token"]);
+    console.log("This is the user", user);
+    console.log("This is the user", user._id);
+  }, [getCurrentProfile, user]);
 
   return (
     <Fragment>
