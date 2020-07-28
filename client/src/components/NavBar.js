@@ -5,8 +5,10 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom';
 // import { RiBasketballLine } from 'react-icons/ri';
 import { userLogout } from '../redux/actions/authActions';
+import SearchBar from './SearchBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+const playerList = require('../utils/playerList');
 
 const ecTeams = [
     { name: 'Atlanta Hawks', id: 'ATL' },
@@ -90,9 +92,8 @@ class NavBar extends React.Component {
             </ul>
         );
               
-
         return (
-            <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
                 <div className="container"> 
                     <i className="fas fa-basketball-ball text-light fa-2x mr-2"></i>
                     <Link className="navbar-brand" to="/">CourtVision</Link>
@@ -102,9 +103,10 @@ class NavBar extends React.Component {
 
                     <div className="collapse navbar-collapse" id="mobile-nav">
                         <ul className="navbar-nav mr-auto">
-                            <form className="form-inline">
+                            {/* <form className="form-inline">
                                 <input className="form-control mr-sm-2" type="search" placeholder="Player Search" aria-label="Search"></input>
-                            </form>
+                            </form> */}
+                            <SearchBar options={playerList}/>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Teams
@@ -117,39 +119,11 @@ class NavBar extends React.Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/leagueleaders">League Leaders</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/player/Stephen%20Curry">Test Player</Link>
-                            </li>
                         </ul>
                         {isAuthenticated ? loggedInLinks : guestLinks}
                     </div>
                 </div>
             </nav>
-            // <Navbar className="navbar-dark bg-dark" expand='md'>
-            //     <Navbar.Brand href="/">
-            //         <RiBasketballLine size={36} className="d-inline-block align-top" />
-            //         CourtVision
-            //     </Navbar.Brand>
-            //     <Navbar.Toggle aria-controls='basic-navbar-nav' />
-            //     <Navbar.Collapse id='basic-navbar-nav'>
-            //         <Nav className='mr-auto'>
-            //         <Form inline>
-            //             <FormControl type="text" placeholder="Player Search" className="mr-sm-2" />
-            //         </Form>
-            //         <NavDropdown title="Teams">
-            //             <NavDropdown.Header>Eastern Conference</NavDropdown.Header>
-            //             {ecTeamsDropdown}
-            //             <NavDropdown.Divider />
-            //             <NavDropdown.Header>Western Conference</NavDropdown.Header>
-            //             {wcTeamsDropdown}
-            //         </NavDropdown>
-            //         <Nav.Link href='#LeagueLeaders'>League Leaders</Nav.Link>
-            //         </Nav>
-            //         <Nav>
-            //             <Nav.Link href="/login">Login</Nav.Link>
-            //         </Nav>
-            //     </Navbar.Collapse>
-            // </Navbar>
         );
     }
 }
