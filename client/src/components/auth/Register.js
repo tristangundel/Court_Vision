@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { Container, Row, Form, Button } from "react-bootstrap";
 import { GiBasketballBall } from "react-icons/gi";
 import { registerUser } from "../../redux/actions/authActions";
-// import { GET_ERRORS } from "../../redux/actions/actionTypes";
+import { GET_ERRORS } from "../../redux/actions/actionTypes";
 
 class Register extends React.Component {
   constructor() {
