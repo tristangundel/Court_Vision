@@ -34,6 +34,21 @@ class Player extends React.Component {
         this.getInfo(this.props.match.params.playerID);
     }
 
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.match.params.playerID !== prevState.id){
+            return {playerInfo: {}};
+        } 
+        else {
+            return null;
+        }
+     }
+
+    componentDidUpdate(nextProps) {
+        if ((Object.keys(this.state.playerInfo).length === 0) && typeof(this.state.playerInfo) === "object") {
+            this.getInfo(nextProps.match.params.playerID);
+        }
+    }
+
     render() {
         let seasonStats = [];
         if (this.state.playerStats.length !== 0){
@@ -65,7 +80,7 @@ class Player extends React.Component {
                     </tr>);
             });
         }
-        if (!(Object.keys(this.state.playerStats).length === 0) && typeof(this.state.playerStats) === "object") {
+        if (!(Object.keys(this.state.playerInfo).length === 0) && typeof(this.state.playerInfo) === "object") {
             return (
                 <div className="player justify-content-center">
                     <div className="text-light">
@@ -146,7 +161,15 @@ class Player extends React.Component {
                 </div>
             );
         } else {
-            return(<Loader />);
+            return(
+                <div className="player justify-content-center">
+                    <div className="text-light">
+                        <div className="container  dark-overlay center">
+                            <Loader />
+                        </div>
+                    </div>
+                </div>
+            );
         }
     }
 }
