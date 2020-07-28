@@ -7,16 +7,16 @@ import { getCurrentProfile } from "../../redux/actions/profile";
 const Dashboard = ({ getCurrentProfile, auth: { user } }) => {
   useEffect(() => {
     getCurrentProfile();
-    console.log("This next one is the axios.defaults In getCurrentProfile");
-    console.log(axios.defaults.headers.common["x-auth-token"]);
     console.log("This is the user", user);
-    console.log("This is the user", user._id);
+    console.log("This is the user.user.id", user.user.id);
   }, [getCurrentProfile, user]);
+
+  // send axios call to api route to get profile info with ID
 
   return (
     <Fragment>
       <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user && user._id}
+        <i className='fas fa-user' /> Welcome {user && user.user.id}
       </p>
       <h1>This is the Dashboard </h1>
       <h4> Favorite players </h4>
