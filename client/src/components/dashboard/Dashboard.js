@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+// import Loader from "react-loader-spinner";
 import { getCurrentProfile } from "../../redux/actions/profile";
 
 const Dashboard = ({
@@ -13,18 +14,17 @@ const Dashboard = ({
     getCurrentProfile();
     console.log("This is the user", user);
     console.log("This is the user.user.id", user.user.id);
-    console.log("This is the profile", profile);
-  }, [getCurrentProfile, user, profile]);
+  }, [getCurrentProfile]);
 
   return (
     <Fragment>
-      <p className='lead'>
-        <i className='fas fa-user' /> This is the user.id {user && user.user.id}
-      </p>
-      <h1>This is the Dashboard </h1>
-      <h4> Favorite players </h4>
-      <h4> Favorite teams </h4>
-      <h4> Status </h4>
+      <p>Here is user.user.id {user.user.id}</p>
+      <p>Welcome {JSON.stringify(profile, ["user"])}</p>
+      <p>Here is entire profile {JSON.stringify(profile, "\t")}</p>
+      <p>Favorite team {JSON.stringify(profile, ["team"])}</p>
+      <p>Here is the location {JSON.stringify(profile, ["location"])}</p>
+      <p>Here is the website {JSON.stringify(profile, ["website"])}</p>
+      <p>Here is the id {JSON.stringify(profile, ["_id"])}</p>
     </Fragment>
   );
 };
