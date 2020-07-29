@@ -7,22 +7,20 @@ import { getCurrentProfile } from "../../redux/actions/profile";
 const Dashboard = ({
   getCurrentProfile,
   auth: { user },
-  profile: { profile, youtube },
+  profile: { profile },
 }) => {
   useEffect(() => {
     getCurrentProfile();
     console.log("This is the user", user);
     console.log("This is the user.user.id", user.user.id);
     console.log("This is the profile", profile);
-    // console.log("This is the profile", profile.user.id);
-  }, [getCurrentProfile, user, profile, youtube]);
+  }, [getCurrentProfile, user, profile]);
 
   return (
     <Fragment>
       <p className='lead'>
         <i className='fas fa-user' /> This is the user.id {user && user.user.id}
       </p>
-      <i className='fas fa-profile' /> This is the profile {}
       <h1>This is the Dashboard </h1>
       <h4> Favorite players </h4>
       <h4> Favorite teams </h4>
