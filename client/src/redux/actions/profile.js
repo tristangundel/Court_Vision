@@ -5,7 +5,7 @@ import { GET_PROFILE, PROFILE_ERROR } from "./actionTypes";
 // make request for backend to get User profiles
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/user/5f21fb404955fb658a2669b6");
+    const res = await axios.get("/api/profile/user/5f22016c8dff06687d6359f5");
 
     dispatch({
       type: GET_PROFILE,

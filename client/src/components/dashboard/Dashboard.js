@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { get } from "lodash";
 // import Loader from "react-loader-spinner";
 import { getCurrentProfile } from "../../redux/actions/profile";
 
@@ -18,6 +18,7 @@ const Dashboard = ({
 
   return (
     <Fragment>
+      <p>Welcome {get(profile, "user.name", ["DEFAULT"])}!</p>
       <p>Here is user.user.id {user.user.id}</p>
       <p>Welcome {JSON.stringify(profile, ["name"])}</p>
       <p>Here is entire profile {JSON.stringify(profile, "\t")}</p>
