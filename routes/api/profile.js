@@ -37,13 +37,7 @@ router.get("/me", auth, async (req, res) => {
 // @access      Private - needs token
 router.post(
   "/",
-  [
-    auth,
-    [
-      check("status", "Status is required").not().isEmpty(),
-      check("skills", "Skills are required").not().isEmpty(),
-    ],
-  ],
+  [auth, [check("status", "Status is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
 
@@ -52,15 +46,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      status,
-      skills,
-      team,
-      location,
-      youtube,
-      twitter,
-      instagram,
-    } = req.body;
+    const { status, team, location, youtube, twitter, instagram } = req.body;
 
     // Build profile object
     const profileFields = {};
@@ -68,17 +54,9 @@ router.post(
     if (status) profileFields.website = status;
     if (team) profileFields.team = team;
     if (location) profileFields.location = location;
-
-    // We can use an array to save favorite players
-    if (skills) {
-      profileFields.skills = skills.split(",").map((skill) => skill.trim());
-    }
-
-    // Build social object
-    profileFields.social = {};
-    if (youtube) profileFields.social.youtube = youtube;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (instagram) profileFields.social.instagram = instagram;
+    if (youtube) profileFields.youtube = youtube;
+    if (twitter) profileFields.twitter = twitter;
+    if (instagram) profileFields.instagram = instagram;
 
     // look for profile
     try {
