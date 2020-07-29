@@ -22,6 +22,7 @@ app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/posts", require("./routes/api/posts"));
 app.use("/api/players", require("./routes/api/players"));
 app.use("/api/teams", require("./routes/api/teams"));
+app.use("/api/leaders", require("./routes/api/leaders"));
 
 if (process.env.NODE_ENV === 'production') {
   // serve static files
