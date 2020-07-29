@@ -5,9 +5,7 @@ import { GET_PROFILE, PROFILE_ERROR } from "./actionTypes";
 // make request for backend to get User profiles
 export const getCurrentProfile = () => async (dispatch) => {
   try {
-    console.log("This is in the profile.js of redux/actions");
-    console.log(axios.defaults.headers.common["x-auth-token"]);
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get("/api/profile/user/5f20b224995887301c713d2f");
 
     dispatch({
       type: GET_PROFILE,
