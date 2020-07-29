@@ -20,27 +20,17 @@ const ProfileSchema = new mongoose.Schema({
     type: "String",
     required: true,
   },
-  // array of strings for skills
-  skills: {
-    type: [String],
-    required: true,
-  },
   bio: {
     type: "String",
   },
-  social: {
-    youtube: {
-      type: String,
-    },
-    twitter: {
-      type: String,
-    },
-    facebook: {
-      type: String,
-    },
-    instagram: {
-      type: String,
-    },
+  youtube: {
+    type: String,
+  },
+  twitter: {
+    type: String,
+  },
+  instagram: {
+    type: String,
   },
 });
 

@@ -32,7 +32,7 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
-// @routeGET    Post api/profile/me
+// @route       Post api/profile/me
 // @desc        create or update a user profile
 // @access      Private - needs token
 router.post(
@@ -51,7 +51,7 @@ router.post(
     // Build profile object
     const profileFields = {};
     profileFields.user = req.user.id;
-    if (status) profileFields.website = status;
+    if (status) profileFields.status = status;
     if (team) profileFields.team = team;
     if (location) profileFields.location = location;
     if (youtube) profileFields.youtube = youtube;

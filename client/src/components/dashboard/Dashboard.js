@@ -19,12 +19,15 @@ const Dashboard = ({
   return (
     <Fragment>
       <p>Here is user.user.id {user.user.id}</p>
-      <p>Welcome {JSON.stringify(profile, ["user"])}</p>
+      <p>Welcome {JSON.stringify(profile, ["name"])}</p>
       <p>Here is entire profile {JSON.stringify(profile, "\t")}</p>
       <p>Favorite team {JSON.stringify(profile, ["team"])}</p>
       <p>Here is the location {JSON.stringify(profile, ["location"])}</p>
-      <p>Here is the website {JSON.stringify(profile, ["website"])}</p>
       <p>Here is the id {JSON.stringify(profile, ["_id"])}</p>
+      <p>Here is the status {JSON.stringify(profile, ["status"])}</p>
+      <p>Here is the IG {JSON.stringify(profile, ["instagram"])}</p>
+      <p>Here is the Twitter {JSON.stringify(profile, ["twitter"])}</p>
+      <p>Here is the YouTube {JSON.stringify(profile, ["youtube"])}</p>
     </Fragment>
   );
 };
