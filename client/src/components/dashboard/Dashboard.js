@@ -24,9 +24,24 @@ const Dashboard = ({
       </p>
       <p>Your location is set to: {get(profile, "location", ["DEFAULT"])}.</p>
       <p>Current status {get(profile, "status", ["DEFAULT"])}</p>
-      <p>Your IG: {get(profile, "instagram", ["DEFAULT"])}</p>
-      <p>Your Twitter: {get(profile, "twitter", ["DEFAULT"])}</p>
-      <p>Your YouTube: {get(profile, "youtube", ["DEFAULT"])}</p>
+      <p>
+        Your IG:
+        <a href={get(profile, "instagram", ["DEFAULT"])}>
+          {get(profile, "instagram", ["DEFAULT"])}
+        </a>
+      </p>
+      <p>
+        Your Twitter:
+        <a href={get(profile, "twitter", ["DEFAULT"])}>
+          {get(profile, "twitter", ["DEFAULT"])}
+        </a>
+      </p>
+      <p>
+        Your YouTube:
+        <a href={get(profile, "youtube", ["DEFAULT"])}>
+          {get(profile, "youtube", ["DEFAULT"])}
+        </a>
+      </p>
       {/* <p>
         Here is entire profile -- to get stuff in!{" "}
         {JSON.stringify(profile, "\t")}
