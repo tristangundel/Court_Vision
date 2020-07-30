@@ -19,16 +19,18 @@ const Dashboard = ({
   return (
     <Fragment>
       <p>Welcome {get(profile, "user.name", ["DEFAULT"])}!</p>
-      <p>Here is user.user.id {user.user.id}</p>
-      <p>Welcome {JSON.stringify(profile, ["name"])}</p>
-      <p>Here is entire profile {JSON.stringify(profile, "\t")}</p>
-      <p>Favorite team {JSON.stringify(profile, ["team"])}</p>
-      <p>Here is the location {JSON.stringify(profile, ["location"])}</p>
-      <p>Here is the id {JSON.stringify(profile, ["_id"])}</p>
-      <p>Here is the status {JSON.stringify(profile, ["status"])}</p>
-      <p>Here is the IG {JSON.stringify(profile, ["instagram"])}</p>
-      <p>Here is the Twitter {JSON.stringify(profile, ["twitter"])}</p>
-      <p>Here is the YouTube {JSON.stringify(profile, ["youtube"])}</p>
+      <p>
+        You have: {get(profile, "team", ["DEFAULT"])} set as your favorite team
+      </p>
+      <p>Your location is set to: {get(profile, "location", ["DEFAULT"])}.</p>
+      <p>Current status {get(profile, "status", ["DEFAULT"])}</p>
+      <p>Your IG: {get(profile, "instagram", ["DEFAULT"])}</p>
+      <p>Your Twitter: {get(profile, "twitter", ["DEFAULT"])}</p>
+      <p>Your YouTube: {get(profile, "youtube", ["DEFAULT"])}</p>
+      {/* <p>
+        Here is entire profile -- to get stuff in!{" "}
+        {JSON.stringify(profile, "\t")}
+      </p> */}
     </Fragment>
   );
 };
