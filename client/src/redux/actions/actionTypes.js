@@ -11,3 +11,6 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+
+// Once you log out it clears the profile
+export const CLEAR_PROFILE = "CLEAR_PROFILE";

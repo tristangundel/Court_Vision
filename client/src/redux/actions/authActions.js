@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../../utils/setAuthToken";
-import { GET_ERRORS, SET_CURRENT_USER } from "./actionTypes";
+import { GET_ERRORS, SET_CURRENT_USER, CLEAR_PROFILE } from "./actionTypes";
 
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
@@ -59,6 +59,7 @@ export const userLogout = (history) => (dispatch) => {
   localStorage.removeItem("jwtToken");
   // remove Auth header for future request
   setAuthToken(false);
+  dispatch({ type: CLEAR_PROFILE });
   // set current user to empty object
   dispatch(setCurrentUser({}));
   history.push("/");
