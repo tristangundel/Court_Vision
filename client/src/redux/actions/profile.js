@@ -1,11 +1,18 @@
 import axios from "axios";
-
 import { GET_PROFILE, PROFILE_ERROR } from "./actionTypes";
 
 // make request for backend to get User profiles
-export const getCurrentProfile = () => async (dispatch) => {
+export const getCurrentProfile = (user) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/user/5f22016c8dff06687d6359f5");
+    // const res = await axios.get("/api/profile/user/5f2319e8ed1cf96908199c08");
+
+    const res = await axios.get(
+      "/api/profile/user/",
+      (params: { user: "bar" })
+    );
+
+    console.log("in profile.js after await");
+    console.log("This is the user", user);
 
     dispatch({
       type: GET_PROFILE,

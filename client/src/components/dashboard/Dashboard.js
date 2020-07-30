@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, ReactReduxContext } from "react-redux";
 import { get } from "lodash";
 // import Loader from "react-loader-spinner";
 import { getCurrentProfile } from "../../redux/actions/profile";
@@ -11,9 +11,8 @@ const Dashboard = ({
   profile: { profile },
 }) => {
   useEffect(() => {
-    getCurrentProfile();
-    console.log("This is the user", user);
-    console.log("This is the user.user.id", user.user.id);
+    getCurrentProfile(user.user.id);
+    console.log(user.user.id);
   }, [getCurrentProfile]);
 
   return (
@@ -41,6 +40,10 @@ const Dashboard = ({
         <a href={get(profile, "youtube", ["DEFAULT"])}>
           {get(profile, "youtube", ["DEFAULT"])}
         </a>
+      </p>
+      <p>
+        This is the user to where the request should be made:
+        <a>{get(profile, "user._id", ["DEFAULT"])}</a>
       </p>
       {/* <p>
         Here is entire profile -- to get stuff in!{" "}
