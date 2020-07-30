@@ -9,6 +9,7 @@ import { setCurrentUser } from "./redux/actions/authActions";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
+import createProfile from "./components/profile-form/createProfile";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 // import Footer from './components/Footer';
@@ -38,6 +39,11 @@ function App() {
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute
+                exact
+                path='/create-profile'
+                component={createProfile}
+              />
               <Route exact path='/testplayer' component={Player} />
               <Route exact path='/player/:playerID' component={Player} />
               <Route exact path='/team/:teamID' component={Team} />
