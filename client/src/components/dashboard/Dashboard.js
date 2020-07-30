@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import { connect, ReactReduxContext } from "react-redux";
+import { connect } from "react-redux";
 import { get } from "lodash";
 // import Loader from "react-loader-spinner";
 import { getCurrentProfile } from "../../redux/actions/profile";
