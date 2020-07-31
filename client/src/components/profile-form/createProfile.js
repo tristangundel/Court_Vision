@@ -3,26 +3,34 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../redux/actions/profile";
+import { create } from "lodash";
 
-const CreateProfile = (props) => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
-    location: "",
     status: "",
     team: "",
+    location: "",
+    youtube: "",
     instagram: "",
     twitter: "",
-    youtube: "",
   });
+
+  console.log("in create profile");
 
   const { location, status, team, instagram, twitter, youtube } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createProfile(formData, history);
+  };
+
   return (
     <Fragment>
       <h2>Create Your Profile</h2>
-      <form class='form'>
+      <form class='form' onSubmit={(e) => onSubmit(e)}>
         <div class='form-group'>
           <div class='form-group'>
             <input
@@ -35,19 +43,10 @@ const CreateProfile = (props) => {
           </div>
         </div>
         <div class='form-group'>
-          <input
-            type='text'
-            placeholder='Location'
-            name='location'
-            value={location}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-        <div class='form-group'>
           <small class='form-text'>
             Please select a team from the dropdown menus
           </small>
-          <select name='status' value={team} onChange={(e) => onChange(e)}>
+          <select name='team' value={team} onChange={(e) => onChange(e)}>
             <option value='0'> Select A Team</option>
             <option value='Atlanta Hawks'>Atlanta Hawks</option>
             <option value='Boston Celtics'>Boston Celtics</option>
@@ -86,6 +85,15 @@ const CreateProfile = (props) => {
             <option value='Utah Jazz'>Utah Jazz</option>
           </select>
         </div>
+        <div class='form-group'>
+          <input
+            type='text'
+            placeholder='Location'
+            name='location'
+            value={location}
+            onChange={(e) => onChange(e)}
+          />
+        </div>
         <div class='my-2'>
           <button type='button' class='btn btn-light'>
             Add Social Network Links
@@ -97,23 +105,23 @@ const CreateProfile = (props) => {
         </div>
 
         <div class='form-group social-input'>
-          <i class='fab fa-twitter fa-2x'></i>
-          <input
-            type='text'
-            placeholder='Twitter URL'
-            name='twitter'
-            value={twitter}
-            onChange={(e) => onChange(e)}
-          />
-        </div>
-
-        <div class='form-group social-input'>
           <i class='fab fa-youtube fa-2x'></i>
           <input
             type='text'
             placeholder='YouTube URL'
             name='youtube'
             value={youtube}
+            onChange={(e) => onChange(e)}
+          />
+        </div>
+
+        <div class='form-group social-input'>
+          <i class='fab fa-twitter fa-2x'></i>
+          <input
+            type='text'
+            placeholder='Twitter URL'
+            name='twitter'
+            value={twitter}
             onChange={(e) => onChange(e)}
           />
         </div>
@@ -137,6 +145,13 @@ const CreateProfile = (props) => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
 
-export default CreateProfile;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(null, { createProfile })(withRouter(CreateProfile));
