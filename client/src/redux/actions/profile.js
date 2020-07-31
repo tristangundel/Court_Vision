@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GET_PROFILE, PROFILE_ERROR } from "./actionTypes";
-import { setAlert } from "./alert";
 
 // make request for backend to get User profiles
 export const getCurrentProfile = (user) => async (dispatch) => {
@@ -25,12 +24,15 @@ export const getCurrentProfile = (user) => async (dispatch) => {
 };
 
 // action to create or update profile
+
+// Currently there is an issue with this. I am not exact sure what it is
+// I think it is not passing the auth-token ??
 export const createProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {
   try {
     const config = {
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
     };
@@ -41,12 +43,6 @@ export const createProfile = (formData, history, edit = false) => async (
       type: GET_PROFILE,
       payload: res.data,
     });
-
-    dispatch(setAlert(edit ? "Profile Updated" : "Profile Created"));
-
-    if (!edit) {
-      history.push("/dashboard");
-    }
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
