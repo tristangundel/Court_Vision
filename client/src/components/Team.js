@@ -52,7 +52,6 @@ class Team extends React.Component {
     }
     
     componentDidMount() {
-        console.log("Mounting!");
         this.getInfo(this.props.match.params.teamID);
 
     }
