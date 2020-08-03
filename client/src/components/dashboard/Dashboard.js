@@ -8,13 +8,15 @@ import { getCurrentProfile } from "../../redux/actions/profile";
 
 const Dashboard = ({
   getCurrentProfile,
-  auth: { user },
+  auth: { user, isAuthenticated },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
     getCurrentProfile(user.user.id);
   }, [getCurrentProfile]);
 
+  // Check to see if we have a profile to load
+  // If it is empty we show welcome new user and redirect to create form
   return loading && profile === null ? (
     <Loader />
   ) : (
@@ -55,13 +57,17 @@ const Dashboard = ({
             This is the user to where the request should be made:
             <a>{get(profile, "user._id", ["DEFAULT"])}</a>
           </p>
-          {/* <p>
-        Here is entire profile -- to get stuff in!{" "}
-        {JSON.stringify(profile, "\t")}
-      </p> */}{" "}
         </Fragment>
       ) : (
         <Fragment>
+          <p>
+            Here is entire user -- to get stuff in! {JSON.stringify(user, "\t")}
+          </p>
+          <p>
+            Here is what isAuthenticated returns!{" "}
+            {JSON.stringify(isAuthenticated, "\t")}
+          </p>
+          <a>{get(profile, "user._id", ["DEFAULT"])}</a>
           <p>
             You have not created a profile .. to do so click the link below{" "}
           </p>

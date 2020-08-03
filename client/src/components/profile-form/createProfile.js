@@ -14,7 +14,7 @@ const CreateProfile = ({ createProfile, history }) => {
     twitter: "",
   });
 
-  console.log("in create profile");
+  console.log("in create profile -- createProfile.js");
 
   const { location, status, team, instagram, twitter, youtube } = formData;
 
