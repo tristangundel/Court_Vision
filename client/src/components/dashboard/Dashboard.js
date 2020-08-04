@@ -33,7 +33,6 @@ const Dashboard = ({
             </p>
             {profile !== null ? (
               <Fragment>
-                <br></br>
                 <p>
                   You have: {get(profile, "team", ["DEFAULT"])} set as your
                   favorite team
@@ -61,6 +60,10 @@ const Dashboard = ({
                     {get(profile, "youtube", ["DEFAULT"])}
                   </a>
                 </p>
+                <p>
+                  To edit profile click here:{" "}
+                  <Link to='/create-profile'> Update Profile </Link>{" "}
+                </p>
               </Fragment>
             ) : (
               <Fragment>
@@ -70,9 +73,8 @@ const Dashboard = ({
                 </p> */}
                 <p>
                   You have not created a profile .. to do so click the link
-                  below{" "}
+                  below <Link to='/create-profile'> Create Profile </Link>
                 </p>
-                <Link to='/create-profile'> Create Profile </Link>
               </Fragment>
             )}
           </div>

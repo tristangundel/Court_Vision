@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, BrowserRouter, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../redux/actions/profile";
@@ -112,12 +112,10 @@ const CreateProfile = ({ createProfile, history }) => {
                 />
               </div>
               <div class='my-2'>
-                <button type='button' class='btn btn-light'>
-                  Add Social Network Links
-                </button>
+                <span>For social media links please enter entire URL.</span>
+                <br></br>
                 <span>
-                  Optional - please enter entire URL. Example:
-                  https://www.instagram.com/houstonrockets/?hl=en
+                  Example: https://www.instagram.com/houstonrockets/?hl=en
                 </span>
               </div>
 
@@ -153,8 +151,12 @@ const CreateProfile = ({ createProfile, history }) => {
                   onChange={(e) => onChange(e)}
                 />
               </div>
-              <input type='submit' class='btn btn-primary my-1' />
-              <a class='btn btn-light my-1' href='dashboard.html'>
+              <input
+                type='submit'
+                value='Submit'
+                class='btn btn-primary my-1'
+              />
+              <a class='btn btn-light my-1' href='/dashboard'>
                 Go Back
               </a>
             </form>

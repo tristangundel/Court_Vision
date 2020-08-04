@@ -43,6 +43,10 @@ export const createProfile = (formData, history, edit = false) => async (
       type: GET_PROFILE,
       payload: res.data,
     });
+
+    if (!edit) {
+      history.push("/dashboard");
+    }
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
