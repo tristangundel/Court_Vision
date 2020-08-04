@@ -1,5 +1,6 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
+import ShotChart from './ShotChart';
 const axios = require('axios');
 
 
@@ -52,7 +53,6 @@ class Player extends React.Component {
     render() {
         let seasonStats = [];
         if (this.state.playerStats.length !== 0){
-            console.log(this.state.playerStats)
             this.state.playerStats.forEach((year) => {
                 seasonStats.push(
                     <tr key={year.season}>
@@ -154,7 +154,8 @@ class Player extends React.Component {
                                     </table>
                                 </div>
                             </div>
-                            <div>
+                            <div id="shot-chart">
+                                <ShotChart player={this.state.playerInfo.firstName + "%20" + this.state.playerInfo.lastName}/>
                             </div>
                         </div>
                     </div>
