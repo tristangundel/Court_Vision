@@ -13,8 +13,6 @@ export const getCurrentProfile = (user) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
-    console.log("in getCurrentProfile of profile.js -- ERROR block");
-
     dispatch({
       type: PROFILE_ERROR,
       payload: {
@@ -39,8 +37,6 @@ export const createProfile = (formData, history, edit = false) => async (
       },
     };
 
-    console.log("in createProfile of profile.js -- TRY block");
-
     const res = await axios.post("/api/profile", formData, config);
 
     dispatch({
@@ -48,8 +44,6 @@ export const createProfile = (formData, history, edit = false) => async (
       payload: res.data,
     });
   } catch (err) {
-    console.log("in createProfile of profile.js -- ERROR block");
-
     dispatch({
       type: PROFILE_ERROR,
       payload: {
