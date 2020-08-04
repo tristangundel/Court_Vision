@@ -20,52 +20,118 @@ const shotMarks = (shots) => shots.map((shot) => {
     );
 })
 
-const shotsByDistance = [];
+var shotsByDistance = [];
+var makesByDistance = [];
+var missesByDistance = [];
 
-const shotDistance = (shots) => {
-    const shotDistData = [];
-    const distCount = {};
+var shotDistance = (shots) => {
+    var shotDistData = [];
+    var makeDistData = [];
+    var missDistData = [];
+    var distCount = {};
+    var makeCount = {};
+    var missCount = {};
+    var shotsByDistance = [];
+    var makesByDistance = [];
+    var missesByDistance = [];
 
     shots.map((shot) => {
         var distance = Math.round(Math.sqrt(((shot.x-247)**2)+((shot.y-45)**2))/10.417);
+        if (shot.madeShot){
+            makeDistData.push(distance);
+        }
+        else{
+            missDistData.push(distance);
+        }
         shotDistData.push(distance);
     })
 
+    var i;
+    for (i = 0; i<36; i++) {
+        distCount[i] = 0;
+        makeCount[i] = 0;
+        missCount[i] = 0;
+    }
+
     shotDistData.map((dist) => {
-        if (distCount[dist]){
-            distCount[dist] += 1
-        }
-        else {
-            distCount[dist] = 1
-        }
+        distCount[dist] += 1
     })
 
-    const entries = Object.entries(distCount);
+    makeDistData.map((dist) => {
+        makeCount[dist] += 1
+    })
 
-    entries.map((entry) => {
+    missDistData.map((dist) => {
+        missCount[dist] += 1
+    })
+
+    var entriesD = Object.entries(distCount);
+
+    entriesD.map((entry) => {
         var item = {x: entry[0].toString(), y: entry[1]};
 
         shotsByDistance.push(item);
     })
+
+    var entriesMa = Object.entries(makeCount);
+
+    entriesMa.map((entry) => {
+        var item = {x: entry[0].toString(), y: entry[1]};
+
+        makesByDistance.push(item);
+    })
+
+    var entriesMi = Object.entries(missCount);
+
+    entriesMi.map((entry) => {
+        var item = {x: entry[0].toString(), y: entry[1]};
+
+        missesByDistance.push(item);
+    })
+
+    var allShots = [];
+    allShots.push(shotsByDistance);
+    allShots.push(makesByDistance);
+    allShots.push(missesByDistance);
+
+    return allShots;
 }
 
-const labelData = shotsByDistance.map((d, idx) => ({
+var distLabels = shotsByDistance.map((d, idx) => ({
     x: d.x,
     y: Math.max(shotsByDistance[idx].y)
   }));
 
-const distChart = (shots) => {
-    shotDistance(shots);
+var makeMissLabels = shotsByDistance.map((d, idx) => ({
+    x: d.x,
+    y: Math.max(makesByDistance[idx].y, missesByDistance[idx].y)
+  }));
 
+var distChart = (shots) => {
+    const allShots = shotDistance(shots);
+    const shotsByDistance = allShots[0];
+    const makesByDistance = allShots[1];
+    const missesByDistance = allShots[2];
     return (
         <div>
-            <XYPlot xType="ordinal" width={700} height={300} xDistance={100}>
-            <VerticalGridLines />
-            <HorizontalGridLines />
-            <XAxis />
-            <YAxis />
-            <VerticalBarSeries className="vertical-bar-series-example" data={shotsByDistance} />
-            <LabelSeries data={labelData} getLabel={d => d.x} />
+            <div style={{color: 'black'}}>Shot Frequency by Distance</div>
+            <XYPlot xType="ordinal" width={800} height={300} xDistance={100}>
+                <VerticalGridLines />
+                <HorizontalGridLines />
+                <XAxis />
+                <YAxis />
+                <VerticalBarSeries className="vertical-bar-series-example" data={shotsByDistance} />
+                <LabelSeries data={distLabels} getLabel={d => d.x} />
+            </XYPlot>
+            <div style={{color: 'black'}}>Make/Miss Frequency by Distance</div>
+            <XYPlot xType="ordinal" width={800} height={300} stackBy="y">
+                <VerticalGridLines />
+                <HorizontalGridLines />
+                <XAxis />
+                <YAxis />
+                <VerticalBarSeries data={makesByDistance}/>
+                <VerticalBarSeries data={missesByDistance}/>
+                <LabelSeries data={makeMissLabels} getLabel={d => d.x} />
             </XYPlot>
         </div>
     );
@@ -118,7 +184,5 @@ class ShotChart extends React.Component {
         }
     }
 }
-        
-
 
 export default ShotChart;
