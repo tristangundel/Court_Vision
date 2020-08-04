@@ -1,5 +1,6 @@
 import React from 'react';
-import {XYPlot,XAxis,YAxis,VerticalGridLines,HorizontalGridLines,VerticalBarSeries,VerticalBarSeriesCanvas,LabelSeries} from 'react-vis';
+import {XYPlot,XAxis,YAxis,VerticalGridLines,HorizontalGridLines,VerticalBarSeries,VerticalBarSeriesCanvas,LabelSeries, ChartLabel, LineSeries} from 'react-vis';
+import '../../node_modules/react-vis/dist/style.css';
 const axios = require('axios');
 
 const shotMarks = (shots) => shots.map((shot) => {
@@ -34,6 +35,7 @@ var shotDistance = (shots) => {
     var shotsByDistance = [];
     var makesByDistance = [];
     var missesByDistance = [];
+    var fgpByDistance = [];
 
     shots.map((shot) => {
         var distance = Math.round(Math.sqrt(((shot.x-247)**2)+((shot.y-45)**2))/10.417);
@@ -77,7 +79,6 @@ var shotDistance = (shots) => {
 
     entriesMa.map((entry) => {
         var item = {x: entry[0].toString(), y: entry[1]};
-
         makesByDistance.push(item);
     })
 
@@ -89,10 +90,20 @@ var shotDistance = (shots) => {
         missesByDistance.push(item);
     })
 
+    for (i = 0; i<shotsByDistance.length; i++){
+        var total = shotsByDistance[i].y;
+        var makes = makesByDistance[i].y;
+        var fgp = makes/total;
+        var item = {x: shotsByDistance[i].x, y: fgp};
+
+        fgpByDistance.push(item);
+    }
+
     var allShots = [];
     allShots.push(shotsByDistance);
     allShots.push(makesByDistance);
     allShots.push(missesByDistance);
+    allShots.push(fgpByDistance);
 
     return allShots;
 }
@@ -112,6 +123,7 @@ var distChart = (shots) => {
     const shotsByDistance = allShots[0];
     const makesByDistance = allShots[1];
     const missesByDistance = allShots[2];
+    const fgpByDistance = allShots[3];
     return (
         <div>
             <div style={{color: 'black'}}>Shot Frequency by Distance</div>
@@ -132,6 +144,24 @@ var distChart = (shots) => {
                 <VerticalBarSeries data={makesByDistance}/>
                 <VerticalBarSeries data={missesByDistance}/>
                 <LabelSeries data={makeMissLabels} getLabel={d => d.x} />
+            </XYPlot>
+            <div style={{color: 'black'}}>FG% by Distance</div>
+            <XYPlot xType="ordinal" width={800} height={300}>
+                <VerticalGridLines />
+                <HorizontalGridLines />
+                <XAxis />
+                <YAxis />
+                <ChartLabel 
+                    text="Distance in ft."
+                    className="alt-x-label"
+                    includeMargin={false}
+                />
+                <ChartLabel 
+                    text="FG%"
+                    includeMargin={false}
+                    style={{transform: 'rotate(-90)', textAnchor: 'end'}}
+                />
+                <LineSeries className="first-series" data={fgpByDistance}/>
             </XYPlot>
         </div>
     );
