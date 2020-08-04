@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import { get } from "lodash";
 import Loader from "react-loader-spinner";
 import { getCurrentProfile } from "../../redux/actions/profile";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../../../client/src/";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -21,59 +23,73 @@ const Dashboard = ({
     <Loader />
   ) : (
     <Fragment>
-      <p>
-        Welcome {get(profile, "user.name", ["New Court Vision member :) "])}!
-      </p>
-      {profile !== null ? (
-        <Fragment>
-          {" "}
-          <p>
-            You have: {get(profile, "team", ["DEFAULT"])} set as your favorite
-            team
-          </p>
-          <p>
-            Your location is set to: {get(profile, "location", ["DEFAULT"])}.
-          </p>
-          <p>Current status {get(profile, "status", ["DEFAULT"])}</p>
-          <p>
-            Your IG:
-            <a href={get(profile, "instagram", ["DEFAULT"])}>
-              {get(profile, "instagram", ["DEFAULT"])}
-            </a>
-          </p>
-          <p>
-            Your Twitter:
-            <a href={get(profile, "twitter", ["DEFAULT"])}>
-              {get(profile, "twitter", ["DEFAULT"])}
-            </a>
-          </p>
-          <p>
-            Your YouTube:
-            <a href={get(profile, "youtube", ["DEFAULT"])}>
-              {get(profile, "youtube", ["DEFAULT"])}
-            </a>
-          </p>
-          <p>
-            This is the user to where the request should be made:
-            <a>{get(profile, "user._id", ["DEFAULT"])}</a>
-          </p>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>
-            Here is entire user -- to get stuff in! {JSON.stringify(user, "\t")}
-          </p>
-          <p>
-            Here is what isAuthenticated returns!{" "}
-            {JSON.stringify(isAuthenticated, "\t")}
-          </p>
-          {/* <a>{get(profile, "user._id", ["DEFAULT"])}</a> */}
-          <p>
-            You have not created a profile .. to do so click the link below{" "}
-          </p>
-          <Link to='/create-profile'> Create Profile </Link>
-        </Fragment>
-      )}
+      <div className='landing'>
+        <div className='dark-overlay landing-inner text-light'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-md-12 text-center'></div>
+              <p>
+                Welcome{" "}
+                {get(profile, "user.name", ["New Court Vision member :) "])}!
+              </p>
+              {profile !== null ? (
+                <Fragment>
+                  <div className='landing'>
+                    <div className='dark-overlay landing-inner text-light'>
+                      <div className='container'>
+                        <div className='row'>
+                          <div className='col-md-12 text-center'></div>
+                          <p>
+                            You have: {get(profile, "team", ["DEFAULT"])} set as
+                            your favorite team
+                          </p>
+                          <p>
+                            Your location is set to:{" "}
+                            {get(profile, "location", ["DEFAULT"])}.
+                          </p>
+                          <p>
+                            Current status {get(profile, "status", ["DEFAULT"])}
+                          </p>
+                          <p>
+                            Your IG:
+                            <a href={get(profile, "instagram", ["DEFAULT"])}>
+                              {get(profile, "instagram", ["DEFAULT"])}
+                            </a>
+                          </p>
+                          <p>
+                            Your Twitter:
+                            <a href={get(profile, "twitter", ["DEFAULT"])}>
+                              {get(profile, "twitter", ["DEFAULT"])}
+                            </a>
+                          </p>
+                          <p>
+                            Your YouTube:
+                            <a href={get(profile, "youtube", ["DEFAULT"])}>
+                              {get(profile, "youtube", ["DEFAULT"])}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <p>
+                    Here is entire user -- to get stuff in!{" "}
+                    {JSON.stringify(user, "\t")}
+                  </p>
+                  <p>
+                    You have not created a profile .. to do so click the link
+                    below{" "}
+                  </p>
+                  <Link to='/create-profile'> Create Profile </Link>
+                </Fragment>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     </Fragment>
   );
 };
