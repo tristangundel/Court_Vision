@@ -67,7 +67,7 @@ const Dashboard = ({
             Here is what isAuthenticated returns!{" "}
             {JSON.stringify(isAuthenticated, "\t")}
           </p>
-          <a>{get(profile, "user._id", ["DEFAULT"])}</a>
+          {/* <a>{get(profile, "user._id", ["DEFAULT"])}</a> */}
           <p>
             You have not created a profile .. to do so click the link below{" "}
           </p>
