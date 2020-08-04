@@ -36,6 +36,10 @@ const CreateProfile = ({ createProfile, history }) => {
             <form class='form' onSubmit={(e) => onSubmit(e)}>
               <div class='form-group'>
                 <div class='form-group'>
+                  <small class='form-text'>
+                    Watching a game? Getting ready for a fantasy basketball
+                    season? Please include a status!{" "}
+                  </small>
                   <input
                     type='text'
                     placeholder='Status'
@@ -43,6 +47,7 @@ const CreateProfile = ({ createProfile, history }) => {
                     value={status}
                     onChange={(e) => onChange(e)}
                   />
+                  <small> * = required field</small>
                 </div>
               </div>
               <div class='form-group'>
