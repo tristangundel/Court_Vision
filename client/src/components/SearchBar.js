@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-const playerList =  require('../utils/playerList');
+
 
 class SearchBar extends React.Component {
     constructor() {
@@ -80,6 +80,8 @@ class SearchBar extends React.Component {
                                         {option}
                                     </li>
                                 );
+                            } else {
+                                return null;
                             }
                         })}
                     </ul>

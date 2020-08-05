@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Container, Row, Form, Button } from "react-bootstrap";
+import { Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { GiBasketballBall } from "react-icons/gi";
 import { registerUser } from "../../redux/actions/authActions";
-// import { GET_ERRORS } from "../../redux/actions/actionTypes";
+import { resetErrors, setErrors } from "../../redux/actions/errorActions";
 
 class Register extends React.Component {
   constructor() {
@@ -16,21 +16,38 @@ class Register extends React.Component {
       name: "",
       password: "",
       confirmPass: "",
-      errors: {},
+      errors: [],
+      showErrors: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // Upon updating component, errors will be transferred to state
-  componentDidUpdate(nextProps) {
-    if (
-      !(Object.keys(nextProps.errors).length === 0) &&
-      typeof nextProps.errors === "object"
-    ) {
-      this.setState({ errors: nextProps.errors });
-    }
+  componentDidMount() {
+    this.props.resetErrors();
   }
+
+  // // Upon updating component, errors will be transferred to state
+  // componentDidUpdate(nextProps) {
+  //   if (!nextProps.errors.length === this.state.errors.length) {
+  //     this.setState({ 
+  //       errors: nextProps.errors[nextProps.errors.length  - 1],
+  //       showErrors: this.state.email.length === 0 ? false : true
+  //       });
+  //   }
+  // }
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(nextProps.errors.length !== 0 && nextProps.errors.length !== prevState.errors.length){
+        return ({
+          errors: nextProps.errors[nextProps.errors.length  - 1],
+          showErrors: nextProps.errors[nextProps.errors.length  - 1].length === 0 ? false : true
+        });
+    } 
+    else {
+        return ({showErrors: false});
+    }
+ }
 
   // handles changes in the input values when a user types
   handleChange(event) {
@@ -43,17 +60,27 @@ class Register extends React.Component {
   // handles submission of form to create a new user
   handleSubmit(event) {
     event.preventDefault();
-    const newUser = {
-      email: this.state.email,
-      name: this.state.name,
-      password: this.state.password,
-      confirmPass: this.state.confirmPass,
-    };
+    if (this.state.password !== this.state.confirmPass) {
+      this.props.setErrors([{msg: "Passwords entered do not match!"}])
+      this.setState({
+        password: "",
+        confirmPass: ""
+      });
+    } else {
+      const newUser = {
+        email: this.state.email,
+        name: this.state.name,
+        password: this.state.password
+      };
 
-    this.props.registerUser(newUser, this.props.history);
+      this.props.registerUser(newUser, this.props.history);
+    }
   }
 
   render() {
+    if (this.props.auth.isAuthenticated) {
+      return (<Redirect to="/"/>)
+    }
     return (
       <Container>
         <div className='authForm'>
@@ -107,6 +134,7 @@ class Register extends React.Component {
                 required
               />
             </Form.Group>
+            <Alert variant="danger" show={this.state.showErrors}>{this.state.errors.length !== 0 ? this.state.errors.msg : null}</Alert>
             <Button variant='primary' type='submit'>
               Register
             </Button>
@@ -122,13 +150,15 @@ class Register extends React.Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
+  resetErrors: PropTypes.func.isRequired,
+  setErrors: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.authorization,
+  auth: state.auth,
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
+export default connect(mapStateToProps, { registerUser, resetErrors, setErrors })(withRouter(Register));

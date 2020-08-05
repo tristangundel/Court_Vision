@@ -25,7 +25,7 @@ router.post(
     const errors = validationResult(req);
     // if errors are there
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json(errors.array());
     }
 
     // pulls from req.body so you wont have to do that everytime
@@ -39,7 +39,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "User already exists " }] });
+          .json([{ status: 400, msg: "User already exists" }]);
       }
 
       // create instance of user, does not save it yet

@@ -1,4 +1,4 @@
-import { GET_ERRORS, REMOVE_ALERT } from "../actions/actionTypes";
+import { GET_ERRORS, RESET_ERRORS, REMOVE_ALERT } from "../actions/actionTypes";
 
 const initialState = [];
 
@@ -7,7 +7,9 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_ERRORS:
-      return [...state, payload];
+      return payload;
+    case RESET_ERRORS:
+      return [];
     case REMOVE_ALERT:
       return state.filter((alert) => alert.id !== payload);
     default:
