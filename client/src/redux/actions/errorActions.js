@@ -8,7 +8,6 @@ export const resetErrors = () => (dispatch) => {
 };
 
 export const setErrors = (errors) => (dispatch) => {
-    console.log(errors);
     dispatch({
         type: GET_ERRORS,
         payload: errors
