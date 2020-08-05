@@ -50,7 +50,6 @@ router.post(
 
       // See if user exsists
       if (!user) {
-        console.log("user error");
         return res
           .status(400)
           .json([{ status: 400, msg: "Invalid Credentials" }]);
@@ -60,8 +59,7 @@ router.post(
       const isMatch = await bcrypt.compare(password, user.password);
 
       // see if there is not a match
-      if (!isMatch) {
-        console.log("credential error");
+      if (!isMatch) {XPathResult
         return res
           .status(400)
           .json([{ status: 400, msg: "Invalid Credentials" }]);
