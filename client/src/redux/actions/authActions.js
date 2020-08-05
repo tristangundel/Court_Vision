@@ -9,6 +9,10 @@ export const registerUser = (userData, history) => (dispatch) => {
     .post("/api/users", userData)
     .then((res) => {
       // if call is successful then redirect to the login page
+      dispatch({
+        type: GET_ERRORS,
+        payload: []
+      });
       history.push("/login");
     })
     .catch((err) =>
@@ -22,9 +26,9 @@ export const registerUser = (userData, history) => (dispatch) => {
 
 // action to log in a user and then set current user
 export const loginUser = (userData, history) => (dispatch) => {
-  axios
-    .post("api/auth", userData)
+  axios.post("api/auth", userData)
     .then((res) => {
+      console.log("Success");
       // save token to local storage
       const { token } = res.data;
       // set token to ls
@@ -35,14 +39,20 @@ export const loginUser = (userData, history) => (dispatch) => {
       const decoded = jwt_decode(token);
       // set current user
       dispatch(setCurrentUser(decoded));
-      history.push("/");
-    })
-    .catch((err) =>
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data,
+        payload: []
       })
-    );
+      history.push("/");
+    })
+    .catch((err) => {
+      if (err.response) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      }
+    });
 };
 
 // set current user

@@ -39,7 +39,8 @@ router.post(
     const errors = validationResult(req);
     // if errors are there
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      console.log("error array error");
+      return res.status(400).json(errors.array());
     }
 
     const { email, password } = req.body;
@@ -51,17 +52,17 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: "Invalid credentails" }] });
+          .json([{ status: 400, msg: "Invalid Credentials" }]);
       }
 
       // compare plain text with encrypted password
       const isMatch = await bcrypt.compare(password, user.password);
 
       // see if there is not a match
-      if (!isMatch) {
+      if (!isMatch) {XPathResult
         return res
           .status(400)
-          .json({ errors: [{ msg: "Invalid credentails" }] });
+          .json([{ status: 400, msg: "Invalid Credentials" }]);
       }
 
       // Return jsonwebtoken
@@ -83,7 +84,6 @@ router.post(
         }
       );
     } catch (err) {
-      console.error(err.message);
       res.status(500).send("Server Error");
     }
   }

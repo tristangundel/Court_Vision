@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Container, Row, Form, Button } from "react-bootstrap";
+import { Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { GiBasketballBall } from "react-icons/gi";
 import { loginUser } from "../../redux/actions/authActions";
+import { resetErrors } from "../../redux/actions/errorActions";
 
 class Login extends React.Component {
   constructor() {
@@ -13,21 +14,38 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errors: {},
+      errors: [],
+      showErrors: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // when component updates current errors will be transferred to component's state
-  componentDidUpdate(nextProps) {
-    if (
-      !(Object.keys(nextProps.errors).length === 0) &&
-      typeof nextProps.errors === "object"
-    ) {
-      this.setState({ errors: nextProps.errors });
-    }
+  componentDidMount() {
+    this.props.resetErrors();
   }
+
+  // // when component updates current errors will be transferred to component's state
+  // componentDidUpdate(nextProps) {
+  //   if (!nextProps.errors.length === this.state.errors.length) {
+  //     this.setState({ 
+  //       errors: nextProps.errors[nextProps.errors.length  - 1],
+  //       showErrors: this.state.email.length === 0 ? false : true
+  //       });
+  //   }
+  // }
+
+  static getDerivedStateFromProps(nextProps, prevState){
+    if(nextProps.errors.length !== 0 && nextProps.errors.length !== prevState.errors.length){
+        return ({
+          errors: nextProps.errors[nextProps.errors.length  - 1],
+          showErrors: nextProps.errors[nextProps.errors.length  - 1].length === 0 ? false : true
+        });
+    } 
+    else {
+        return ({showErrors: false});
+    }
+ }
 
   // handles the change in input values when a user types
   handleChange(event) {
@@ -49,6 +67,10 @@ class Login extends React.Component {
   }
 
   render() {
+    // retrieve whether or not user is logged in
+    if (this.props.auth.isAuthenticated) {
+      return (<Redirect to="/"/>)
+    }
     return (
       <Container>
         <div className='authForm'>
@@ -69,6 +91,7 @@ class Login extends React.Component {
                 name='email'
                 value={this.state.email}
                 onChange={this.handleChange}
+                required
               />
             </Form.Group>
             <Form.Group controlId='formGroupPassword'>
@@ -78,8 +101,10 @@ class Login extends React.Component {
                 name='password'
                 value={this.state.password}
                 onChange={this.handleChange}
+                required
               />
             </Form.Group>
+            <Alert variant="danger" show={this.state.showErrors}>{this.state.errors.length !== 0 ? this.state.errors.msg : null}</Alert>
             <Button variant='primary' type='submit'>
               Login
             </Button>
@@ -96,14 +121,17 @@ class Login extends React.Component {
 // declares the various prop types in this component
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  resetErrors: PropTypes.func.isRequired,
   auth: PropTypes.object,
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.array.isRequired,
 };
 
 // creates updated components with auth and errors mapped from state to props
-const mapStateToProps = (state) => ({
-  auth: state.authorization,
-  errors: state.errors,
-});
+const mapStateToProps = (state) => {
+  return ({
+    auth: state.auth,
+    errors: state.errors,
+  });
+};
 
-export default connect(mapStateToProps, { loginUser })(withRouter(Login));
+export default connect(mapStateToProps, { loginUser, resetErrors })(withRouter(Login));
