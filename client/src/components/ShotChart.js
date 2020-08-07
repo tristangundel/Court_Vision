@@ -107,7 +107,10 @@ var shotDistance = (shots) => {
   for (i = 0; i < 41; i++) {
     var total = shotsByDistance[i].y;
     var makes = makesByDistance[i].y;
-    var fgp = makes / total;
+    var fgp = 0;
+    if(total !== 0) {
+      fgp = makes/total;
+    }
     var item = { x: shotsByDistance[i].x, y: fgp };
 
     fgpByDistance.push(item);
