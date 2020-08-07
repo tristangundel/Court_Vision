@@ -10,8 +10,9 @@ import {
   LabelSeries,
   ChartLabel,
   LineSeries,
+  DiscreteColorLegend
 } from "react-vis";
-// import "../../node_modules/react-vis/dist/style.css";
+import "../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
 
 const shotMarks = (shots) =>
@@ -139,30 +140,65 @@ var distChart = (shots) => {
   const fgpByDistance = allShots[3];
   return (
     <div>
-      <div style={{ color: "black" }}>Shot Frequency by Distance</div>
-      <XYPlot xType='ordinal' width={800} height={300} xDistance={100}>
+      <h4>Shot Frequency by Distance</h4>
+      <XYPlot xType='ordinal' width={600} height={300} xDistance={100} style={{background: '#f7f7f7'}}>
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
         <YAxis />
+        <ChartLabel
+          text='Distance in ft.'
+          className='alt-x-label'
+          includeMargin={false}
+          style={{textAnchor: 'end'}}
+        />
+        <ChartLabel
+          text='# of Shots'
+          includeMargin={false}
+          style={{ transform: "rotate(-90)", textAnchor: "end" }}
+        />
         <VerticalBarSeries
           className='vertical-bar-series-example'
           data={shotsByDistance}
         />
         <LabelSeries data={distLabels} getLabel={(d) => d.x} />
       </XYPlot>
-      <div style={{ color: "black" }}>Make/Miss Frequency by Distance</div>
-      <XYPlot xType='ordinal' width={800} height={300} stackBy='y'>
+      <h4>Make/Miss Frequency by Distance</h4>
+      <XYPlot xType='ordinal' width={600} height={300} stackBy='y' style={{background: '#f7f7f7'}}>
+        <DiscreteColorLegend
+            style={{position: 'absolute', right: '50px', top: '10px'}}
+            orientation="horizontal"
+            items={[
+              {
+                title: 'Make',
+                color: '#12939A'
+              },
+              {
+                title: 'Miss',
+                color: '#79C7E3'
+              }
+            ]}
+          />
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
         <YAxis />
+        <ChartLabel
+          text='Distance in ft.'
+          className='alt-x-label'
+          includeMargin={false}
+        />
+        <ChartLabel
+          text='# of Shots'
+          includeMargin={false}
+          style={{ transform: "rotate(-90)", textAnchor: "end" }}
+        />
         <VerticalBarSeries data={makesByDistance} />
         <VerticalBarSeries data={missesByDistance} />
         <LabelSeries data={makeMissLabels} getLabel={(d) => d.x} />
       </XYPlot>
-      <div style={{ color: "black" }}>FG% by Distance</div>
-      <XYPlot xType='ordinal' width={800} height={300}>
+      <h4>FG% by Distance</h4>
+      <XYPlot xType='ordinal' width={600} height={300} style={{background: '#f7f7f7'}}>
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
@@ -207,26 +243,31 @@ class ShotChart extends React.Component {
 
   render() {
     if (this.state.shots.length === 0) {
-      return <div>This is the Shot Chart</div>;
+      return <div className='mx-2'>
+        <h1 className="display-4">Shot Data Loading...</h1>
+      </div>;
     } else {
       // insert shot chart front-end component here
       return (
-        <div>
-          <div
-            className='container'
-            style={{ position: "relative", height: "472px" }}
-          >
-            <img
-              src='http://d2p3bygnnzw9w3.cloudfront.net/req/1/images/bbr/nbahalfcourt.png'
-              alt='nbahalfcourt'
-              style={{ position: "absolute", height: "472px", width: "500px" }}
-            ></img>
-            <div style={{ position: "absolute" }}>
-              {shotMarks(this.state.shots)}
+        <div className='container mx-2'>
+          <div className="row">
+            <div
+              className='col-6'
+              style={{ position: "relative", height: "500px" }}
+            >
+              <h3>2019-20 Shot Chart</h3>
+              <img
+                src='http://d2p3bygnnzw9w3.cloudfront.net/req/1/images/bbr/nbahalfcourt.png'
+                alt='nbahalfcourt'
+                style={{ position: "absolute", height: "472px", width: "500px" }}
+              ></img>
+              <div style={{ position: "absolute" }}>
+                {shotMarks(this.state.shots)}
+              </div>
             </div>
-          </div>
-          <div className='container' style={{ position: "relative" }}>
-            {distChart(this.state.shots)}
+            <div className='col-6' style={{ position: "relative" }}>
+              {distChart(this.state.shots)}
+            </div>
           </div>
         </div>
       );

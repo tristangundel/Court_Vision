@@ -83,8 +83,8 @@ class Player extends React.Component {
         if (!(Object.keys(this.state.playerInfo).length === 0) && typeof(this.state.playerInfo) === "object") {
             return (
                 <div className="player justify-content-center">
-                    <div className="text-light">
-                        <div className="container-fluid dark-overlay center">
+                    <div className="text-light dark-overlay">
+                        <div className="container-fluid player-overlay center">
                             <div className="row">
                                 <div className="col-4">
                                     <img width="10%" src={ this.state.playerPhoto } alt={this.state.playerInfo.firstName + " " +  this.state.playerInfo.lastName}></img>
@@ -154,9 +154,7 @@ class Player extends React.Component {
                                     </table>
                                 </div>
                             </div>
-                            <div id="shot-chart">
-                                <ShotChart player={this.state.playerInfo.firstName + "%20" + this.state.playerInfo.lastName}/>
-                            </div>
+                            <ShotChart player={this.state.playerInfo.firstName + "%20" + this.state.playerInfo.lastName}/>
                         </div>
                     </div>
                 </div>
@@ -165,7 +163,7 @@ class Player extends React.Component {
             return(
                 <div className="player justify-content-center">
                     <div className="text-light">
-                        <div className="container  dark-overlay center">
+                        <div className="container-fluid  dark-overlay center">
                             <Loader />
                         </div>
                     </div>

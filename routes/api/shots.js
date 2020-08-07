@@ -91,7 +91,7 @@ async function getShots(ID, res) {
     let lastName = ID.split(" ")[1];
     let results = [];
     let count = 0;
-    while (results.length === 0 && count < 10) {
+    while (results.length === 0 && count < 20) {
         results = await getShotData(firstName, lastName);
         count++;
     }
