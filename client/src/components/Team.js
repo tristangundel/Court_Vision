@@ -96,10 +96,10 @@ class Team extends React.Component {
             return (
                 <div className="player justify-content-center">
                     <div className="text-light">
-                        <div className="container mx-5 dark-overlay center">
+                        <div className="container-fluid px-5 dark-overlay center">
                             <div className="row">
                                 <div className="col-4">
-                                    <img height='250px' src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
+                                    <img src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className="display-1">
@@ -157,7 +157,7 @@ class Team extends React.Component {
             return(
                 <div className="player justify-content-center">
                     <div className="text-light">
-                        <div className="container  dark-overlay center">
+                        <div className="container-fluid  dark-overlay center">
                             <Loader />
                         </div>
                     </div>

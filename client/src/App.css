@@ -15,11 +15,22 @@ img {
 .player {
   position: relative;
   width: 100%;
-  background: url("./img/background.jpg") no-repeat;
+  background-image: url('./img/background.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;
   margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.player-overlay {
+  position: relative;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,1));
+  background-size: cover;
+  background-position: center;
+  height:auto;
+  margin-top: 0;
   margin-bottom: -50px;
 }
 
