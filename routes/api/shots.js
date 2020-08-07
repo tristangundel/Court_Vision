@@ -43,6 +43,8 @@ async function fetchUrl(browser, url) {
 
 async function downloadShootingData(browser, first, last) {
     const fl = last.charAt(0);
+    first = first.split('.').join("");
+    last = last.split('.').join("");
     const nameid = last.toLowerCase().slice(0,5) + first.toLowerCase().slice(0,2);
 
     const url = 'https://www.basketball-reference.com/players/'+fl+'/'+nameid+'01/shooting/2020';
@@ -51,7 +53,6 @@ async function downloadShootingData(browser, first, last) {
     console.log(`Downloading HTML from ${url}...`);
     const html = await fetchUrl(browser, url);
 
-    // await fs.promises.writeFile(htmlFilename, html).catch((shootingDataError) => {console.log(shootingDataError)});
     return html;
 }
 
@@ -67,6 +68,8 @@ async function getShotData(first, last) {
 
 async function parseShots(html) {
     const $ = await cheerio.load(html);
+
+    $('#all_shot-chart').contents().filter(function(){return this.nodeType === 8;}).replaceWith(function(){return this.data;})
 
     const divs = await $('.shot-area div').toArray();
 
@@ -91,7 +94,7 @@ async function getShots(ID, res) {
     let lastName = ID.split(" ")[1];
     let results = [];
     let count = 0;
-    while (results.length === 0 && count < 20) {
+    while (results.length === 0 && count < 1) {
         results = await getShotData(firstName, lastName);
         count++;
     }

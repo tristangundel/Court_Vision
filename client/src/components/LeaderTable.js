@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LeaderTable(props) {
 
@@ -6,7 +7,14 @@ export default function LeaderTable(props) {
         return (
             <tr key={player.player}>
                 <td>{player.rank}</td>
-                <td>{player.player}</td>
+                <td>
+                    <Link 
+                        to={`/player/${player.player}`} 
+                        style={{textDecoration: "none", color: "white"}}
+                    >
+                        {player.player}
+                    </Link>
+                </td>
                 <td>{player.team}</td>
                 <td>{player.value}</td>
             </tr>

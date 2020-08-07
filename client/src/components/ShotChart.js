@@ -63,7 +63,7 @@ var shotDistance = (shots) => {
   });
 
   var i;
-  for (i = 0; i < 36; i++) {
+  for (i = 0; i < 41; i++) {
     distCount[i] = 0;
     makeCount[i] = 0;
     missCount[i] = 0;
@@ -104,7 +104,7 @@ var shotDistance = (shots) => {
     missesByDistance.push(item);
   });
 
-  for (i = 0; i < shotsByDistance.length; i++) {
+  for (i = 0; i < 41; i++) {
     var total = shotsByDistance[i].y;
     var makes = makesByDistance[i].y;
     var fgp = makes / total;
