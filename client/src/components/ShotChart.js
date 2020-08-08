@@ -10,7 +10,7 @@ import {
   LabelSeries,
   ChartLabel,
   LineSeries,
-  DiscreteColorLegend
+  DiscreteColorLegend,
 } from "react-vis";
 import "../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
@@ -108,8 +108,8 @@ var shotDistance = (shots) => {
     var total = shotsByDistance[i].y;
     var makes = makesByDistance[i].y;
     var fgp = 0;
-    if(total !== 0) {
-      fgp = makes/total;
+    if (total !== 0) {
+      fgp = makes / total;
     }
     var item = { x: shotsByDistance[i].x, y: fgp };
 
@@ -144,7 +144,13 @@ var distChart = (shots) => {
   return (
     <div>
       <h4>Shot Frequency by Distance</h4>
-      <XYPlot xType='ordinal' width={600} height={300} xDistance={100} style={{background: '#f7f7f7'}}>
+      <XYPlot
+        xType='ordinal'
+        width={600}
+        height={300}
+        xDistance={100}
+        style={{ background: "#f7f7f7" }}
+      >
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
@@ -153,7 +159,7 @@ var distChart = (shots) => {
           text='Distance in ft.'
           className='alt-x-label'
           includeMargin={false}
-          style={{textAnchor: 'end'}}
+          style={{ textAnchor: "end" }}
         />
         <ChartLabel
           text='# of Shots'
@@ -167,21 +173,27 @@ var distChart = (shots) => {
         <LabelSeries data={distLabels} getLabel={(d) => d.x} />
       </XYPlot>
       <h4>Make/Miss Frequency by Distance</h4>
-      <XYPlot xType='ordinal' width={600} height={300} stackBy='y' style={{background: '#f7f7f7'}}>
+      <XYPlot
+        xType='ordinal'
+        width={600}
+        height={300}
+        stackBy='y'
+        style={{ background: "#f7f7f7" }}
+      >
         <DiscreteColorLegend
-            style={{position: 'absolute', right: '50px', top: '10px'}}
-            orientation="horizontal"
-            items={[
-              {
-                title: 'Make',
-                color: '#12939A'
-              },
-              {
-                title: 'Miss',
-                color: '#79C7E3'
-              }
-            ]}
-          />
+          style={{ position: "absolute", right: "50px", top: "10px" }}
+          orientation='horizontal'
+          items={[
+            {
+              title: "Make",
+              color: "#12939A",
+            },
+            {
+              title: "Miss",
+              color: "#79C7E3",
+            },
+          ]}
+        />
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
@@ -201,7 +213,12 @@ var distChart = (shots) => {
         <LabelSeries data={makeMissLabels} getLabel={(d) => d.x} />
       </XYPlot>
       <h4>FG% by Distance</h4>
-      <XYPlot xType='ordinal' width={600} height={300} style={{background: '#f7f7f7'}}>
+      <XYPlot
+        xType='ordinal'
+        width={600}
+        height={300}
+        style={{ background: "#f7f7f7" }}
+      >
         <VerticalGridLines />
         <HorizontalGridLines />
         <XAxis />
@@ -246,14 +263,16 @@ class ShotChart extends React.Component {
 
   render() {
     if (this.state.shots.length === 0) {
-      return <div className='mx-2'>
-        <h1 className="display-4">Shot Data Loading...</h1>
-      </div>;
+      return (
+        <div className='mx-2'>
+          <h1 className='display-4'>Shot Data Loading...</h1>
+        </div>
+      );
     } else {
       // insert shot chart front-end component here
       return (
         <div className='container mx-2'>
-          <div className="row">
+          <div className='row'>
             <div
               className='col-6'
               style={{ position: "relative", height: "500px" }}
@@ -262,7 +281,11 @@ class ShotChart extends React.Component {
               <img
                 src='http://d2p3bygnnzw9w3.cloudfront.net/req/1/images/bbr/nbahalfcourt.png'
                 alt='nbahalfcourt'
-                style={{ position: "absolute", height: "472px", width: "500px" }}
+                style={{
+                  position: "absolute",
+                  height: "472px",
+                  width: "500px",
+                }}
               ></img>
               <div style={{ position: "absolute" }}>
                 {shotMarks(this.state.shots)}
