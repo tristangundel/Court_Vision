@@ -16,7 +16,7 @@ import {
   Borders,
   Hint
 } from "react-vis";
-import "../../node_modules/react-vis/dist/style.css";
+import "../../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
 
 var fgpByDistance = [];
@@ -281,9 +281,11 @@ class ShotChart extends React.Component {
   render() {
     const {data, radius, hoveredNode, offset} = this.state;
     if (this.state.shots.length === 0) {
-      return <div className='mx-2'>
-        <h1 className="display-4">Shot Data Loading...</h1>
-      </div>;
+      return (
+        <div className='mx-2'>
+          <h1 className='display-4'>Shot Data Loading...</h1>
+        </div>
+      );
     } else {
       // insert shot chart front-end component here
       return (
@@ -297,7 +299,11 @@ class ShotChart extends React.Component {
               <img
                 src='http://d2p3bygnnzw9w3.cloudfront.net/req/1/images/bbr/nbahalfcourt.png'
                 alt='nbahalfcourt'
-                style={{ position: "absolute", height: "472px", width: "500px" }}
+                style={{
+                  position: "absolute",
+                  height: "472px",
+                  width: "500px",
+                }}
               ></img>
               <div style={{ position: "absolute" }}>
                 {shotMarks(this.state.shots)}

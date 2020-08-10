@@ -60,6 +60,11 @@ const Dashboard = ({
                     {get(profile, "youtube", ["DEFAULT"])}
                   </a>
                 </p>
+                {/* These below are things we can add later on - Ex: person has
+                favorite player set as Curry. User would see stats about Curry
+                and latest news. Same with team.
+                <p>Below are some statistics on your favorite team:</p>
+                <p>Here are some statistics on your favorite players:</p> */}
                 <p>
                   To edit profile click here:{" "}
                   <Link to='/create-profile'> Update Profile </Link>{" "}
