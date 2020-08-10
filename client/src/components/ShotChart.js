@@ -1,4 +1,5 @@
 import React from "react";
+import {curveCatmullRom} from 'd3-shape';
 import {
   XYPlot,
   XAxis,
@@ -6,19 +7,25 @@ import {
   VerticalGridLines,
   HorizontalGridLines,
   VerticalBarSeries,
-  VerticalBarSeriesCanvas,
   LabelSeries,
   ChartLabel,
   LineSeries,
   DiscreteColorLegend,
+  Crosshair,
+  HexbinSeries,
+  Borders,
+  Hint
 } from "react-vis";
 import "../../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
 
+var fgpByDistance = [];
+
+
 const shotMarks = (shots) =>
   shots.map((shot) => {
     var symbol = shot.madeShot ? "●" : "×";
-    var txtColor = shot.madeShot ? "#11b801" : "#b80110";
+    var txtColor = shot.madeShot ? "#0B4D98" : "#ce1a1a";
     return (
       <div
         style={{
@@ -37,6 +44,7 @@ const shotMarks = (shots) =>
 var shotsByDistance = [];
 var makesByDistance = [];
 var missesByDistance = [];
+var fgpByDistance = [];
 
 var shotDistance = (shots) => {
   var shotDistData = [];
@@ -104,12 +112,12 @@ var shotDistance = (shots) => {
     missesByDistance.push(item);
   });
 
-  for (i = 0; i < 41; i++) {
+  for (i = 1; i < 41; i++) {
     var total = shotsByDistance[i].y;
     var makes = makesByDistance[i].y;
     var fgp = 0;
-    if (total !== 0) {
-      fgp = makes / total;
+    if(total !== 0) {
+      fgp = Number.parseFloat(makes/total).toPrecision(3);
     }
     var item = { x: shotsByDistance[i].x, y: fgp };
 
@@ -140,110 +148,101 @@ var distChart = (shots) => {
   const shotsByDistance = allShots[0];
   const makesByDistance = allShots[1];
   const missesByDistance = allShots[2];
-  const fgpByDistance = allShots[3];
+  fgpByDistance = allShots[3];
   return (
-    <div>
-      <h4>Shot Frequency by Distance</h4>
-      <XYPlot
-        xType='ordinal'
-        width={600}
-        height={300}
-        xDistance={100}
-        style={{ background: "#f7f7f7" }}
-      >
-        <VerticalGridLines />
-        <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
-        <ChartLabel
-          text='Distance in ft.'
-          className='alt-x-label'
-          includeMargin={false}
-          style={{ textAnchor: "end" }}
-        />
-        <ChartLabel
-          text='# of Shots'
-          includeMargin={false}
-          style={{ transform: "rotate(-90)", textAnchor: "end" }}
-        />
-        <VerticalBarSeries
-          className='vertical-bar-series-example'
-          data={shotsByDistance}
-        />
-        <LabelSeries data={distLabels} getLabel={(d) => d.x} />
-      </XYPlot>
-      <h4>Make/Miss Frequency by Distance</h4>
-      <XYPlot
-        xType='ordinal'
-        width={600}
-        height={300}
-        stackBy='y'
-        style={{ background: "#f7f7f7" }}
-      >
-        <DiscreteColorLegend
-          style={{ position: "absolute", right: "50px", top: "10px" }}
-          orientation='horizontal'
-          items={[
-            {
-              title: "Make",
-              color: "#12939A",
-            },
-            {
-              title: "Miss",
-              color: "#79C7E3",
-            },
-          ]}
-        />
-        <VerticalGridLines />
-        <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
-        <ChartLabel
-          text='Distance in ft.'
-          className='alt-x-label'
-          includeMargin={false}
-        />
-        <ChartLabel
-          text='# of Shots'
-          includeMargin={false}
-          style={{ transform: "rotate(-90)", textAnchor: "end" }}
-        />
-        <VerticalBarSeries data={makesByDistance} />
-        <VerticalBarSeries data={missesByDistance} />
-        <LabelSeries data={makeMissLabels} getLabel={(d) => d.x} />
-      </XYPlot>
-      <h4>FG% by Distance</h4>
-      <XYPlot
-        xType='ordinal'
-        width={600}
-        height={300}
-        style={{ background: "#f7f7f7" }}
-      >
-        <VerticalGridLines />
-        <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
-        <ChartLabel
-          text='Distance in ft.'
-          className='alt-x-label'
-          includeMargin={false}
-        />
-        <ChartLabel
-          text='FG%'
-          includeMargin={false}
-          style={{ transform: "rotate(-90)", textAnchor: "end" }}
-        />
-        <LineSeries className='first-series' data={fgpByDistance} />
-      </XYPlot>
+    <div className='col-lg-12 mx-auto'>
+      {/* <div className='col-6' style={{ position: "relative" }}>
+        <h4>Shot Frequency by Distance</h4>
+        <XYPlot xType='ordinal' width={500} height={472} xDistance={100} style={{background: '#f7f7f7'}} color="#0b4d98" colorType="literal">
+          <VerticalGridLines />
+          <HorizontalGridLines />
+          <XAxis 
+            title="Distance in ft."
+          />
+          <YAxis 
+            title="# of Shots"
+          />
+          <VerticalBarSeries
+            className='vertical-bar-series-example'
+            data={shotsByDistance}
+          />
+          <LabelSeries data={distLabels} getLabel={(d) => d.x} />
+        </XYPlot>
+      </div> */}
+      <div className='mt-2'>
+        <h4>Make/Miss Frequency by Distance</h4>
+        <XYPlot xType='ordinal' width={1056} height={300} stackBy='y' style={{background: '#f7f7f7'}}>
+          <DiscreteColorLegend
+              style={{position: 'absolute', right: '50px', top: '10px'}}
+              orientation="horizontal"
+              items={[
+                {
+                  title: 'Make',
+                  color: '#0b4d98'
+                },
+                {
+                  title: 'Miss',
+                  color: '#ce1a1a'
+                }
+              ]}
+            />
+          <VerticalGridLines />
+          <HorizontalGridLines />
+          <XAxis 
+            title="Distance in ft."
+          />
+          <YAxis 
+            title="# of Shots"
+          />
+          <VerticalBarSeries data={makesByDistance} color={"#0b4d98"}/>
+          <VerticalBarSeries data={missesByDistance} color={"#ce1a1a"}/>
+          <LabelSeries data={makeMissLabels} getLabel={(d) => d.x} />
+        </XYPlot>
+      </div>
+
+      
+      <div className='mt-3'>
+        <h4>FG% by Distance</h4>
+        <XYPlot xType='ordinal' width={1056} height={300} style={{background: '#f7f7f7'}} stroke={"#0b4d98"}>
+          <VerticalGridLines />
+          <HorizontalGridLines />
+          <XAxis 
+            title="Distance in ft."
+          />
+          <YAxis 
+            title="FG%"
+          />
+          <LineSeries className='first-series' curve={curveCatmullRom.alpha(0.5)} data={fgpByDistance} />
+        </XYPlot>
+      </div>
     </div>
   );
 };
 
+var shotMap = (shots) => {
+  var shotMapData = [];
+  shots.map((shot) => {
+    var item = {"xdist": ((shot.x-247)/10.417), "ydist":((shot.y-45)/10.417)}
+    shotMapData.push(item);
+  })
+
+  return shotMapData;
+  // return shotMapData.map(row => ({
+  //   xdist: row.xdist + (Math.random() - 0.5) *10,
+  //   ydist: row.ydist + (Math.random()-0.5) * 10
+  // }));
+}
+
 class ShotChart extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       shots: [],
+      crosshairValues: [],
+      data: [],
+      hoveredNode: null,
+      radius: 10,
+      offset: 0
     };
   }
 
@@ -261,7 +260,26 @@ class ShotChart extends React.Component {
     }
   }
 
+  /**
+   * Event handler for onMouseLeave.
+   * @private
+   */
+  _onMouseLeave = () => {
+    this.setState({crosshairValues: []});
+  };
+
+  /**
+   * Event handler for onNearestX.
+   * @param {Object} value Selected value.
+   * @param {index} index Index of the value in the data array.
+   * @private
+   */
+  _onNearestX = (value, {index}) => {
+    this.setState({crosshairValues: fgpByDistance.map(d => d[index])});
+  };
+
   render() {
+    const {data, radius, hoveredNode, offset} = this.state;
     if (this.state.shots.length === 0) {
       return (
         <div className='mx-2'>
@@ -271,11 +289,11 @@ class ShotChart extends React.Component {
     } else {
       // insert shot chart front-end component here
       return (
-        <div className='container mx-2'>
-          <div className='row'>
+        <div className='container justify-content-center mt-4'>
+          <div className="row">
             <div
-              className='col-6'
-              style={{ position: "relative", height: "500px" }}
+              className='col-xl-6'
+              style={{ position: "relative", height:'520px'}}
             >
               <h3>2019-20 Shot Chart</h3>
               <img
@@ -291,9 +309,53 @@ class ShotChart extends React.Component {
                 {shotMarks(this.state.shots)}
               </div>
             </div>
-            <div className='col-6' style={{ position: "relative" }}>
-              {distChart(this.state.shots)}
+            <div
+              className='col-xl-6'
+              style={{ position: "relative", height:'520px'}}
+            >
+              <h3>Shot Frequency Heat Map</h3>
+              <XYPlot
+                xDomain={[-24, 24]}
+                yDomain={[35, -2]}
+                width={500}
+                height={472}
+                getX={d => d.xdist}
+                getY={d => d.ydist}
+                onMouseLeave={() => this.setState({hoveredNode:null})}
+                style={{background:'#f7f7f7'}}
+              >
+                <HexbinSeries
+                  animation
+                  countDomain={[1,15]}
+                  className="hexbin-example"
+                  style={{
+                    stroke: '#125C77',
+                    strokeLinejoin: 'round',
+                  }}
+                  onValueMouseOver={d => this.setState({hoveredNode: d})}
+                  xOffset={offset}
+                  yOffset={offset}
+                  colorRange={['#0b4d98', '#ce1a1a']}
+                  radius={radius}
+                  data={shotMap(this.state.shots)}
+                />
+                <Borders style={{all: {fill: '#fff'}}} />
+                <XAxis />
+                <YAxis />
+                {hoveredNode && (
+                  <Hint
+                    xType='literal'
+                    yType='literal'
+                    getX={d => d.x}
+                    getY={d => d.y}
+                    value={{
+                      Shots: hoveredNode.length
+                    }}
+                  />
+                )}
+              </XYPlot>
             </div>
+            {distChart(this.state.shots)}
           </div>
         </div>
       );
