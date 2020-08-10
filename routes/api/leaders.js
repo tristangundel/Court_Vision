@@ -10,7 +10,16 @@ router.get("/", (req, res) => {
         res.send(leaders);
     })
     .catch((error) => {
-        console.log(error); 
+        if(error.response) {
+            console.log(error.response);
+            res.send({errors: error.response});
+        } else if (error.request) {
+            console.log(error.request);
+            res.send({errors: error.request});
+        } else {
+            console.log(error);
+            res.send({errors: error.message});
+        }
     });
 });
 

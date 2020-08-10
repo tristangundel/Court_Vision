@@ -83,17 +83,17 @@ class Player extends React.Component {
         if (!(Object.keys(this.state.playerInfo).length === 0) && typeof(this.state.playerInfo) === "object") {
             return (
                 <div className="player justify-content-center">
-                    <div className="text-light dark-overlay">
-                        <div className="container-fluid player-overlay center">
+                    <div className="text-light player-overlay">
+                        <div className="container center">
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-lg-4 my-auto">
                                     <img width="10%" src={ this.state.playerPhoto } alt={this.state.playerInfo.firstName + " " +  this.state.playerInfo.lastName}></img>
                                 </div>
                                 <div className="col-8">
                                     <h1 className='display-3'>
                                         {this.state.playerInfo.firstName} {this.state.playerInfo.lastName}
-                                        <small className="text-muted"> - {this.state.playerInfo.position}</small>
                                     </h1>
+                                    <h1><small className="display-4 text-muted">{this.state.playerInfo.position}</small></h1>
                                     <h3 className='display-4'>
                                         {this.state.playerInfo.team}
                                         <small className="text-muted"> - {this.state.playerInfo.number}</small>
@@ -122,7 +122,7 @@ class Player extends React.Component {
                             <div className="container-fluid">
                                 <h2>Per Game Stats</h2>
                                 <div className="table-responsive">
-                                    <table className="table table-striped table-dark table-hover">
+                                    <table className="table table-striped table-dark table-hover" style={{fontSize: 14}}>
                                         <thead>
                                             <tr>
                                                 <th scope="col">Season</th>
