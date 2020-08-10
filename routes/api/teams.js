@@ -42,11 +42,44 @@ function getTeam(teamKeys, key, res) {
                     Logo: logo
                 });
             })
-            .catch((standingsError) => console.log(standingsError));
+            .catch((standingsError) => {
+                if(standingsError.response) {
+                    console.log(standingsError.response);
+                    res.send({errors: standingsError.response});
+                } else if (standingsError.request) {
+                    console.log(standingsError.request);
+                    res.send({errors: standingsError.request});
+                } else {
+                    console.log(standingsError);
+                    res.send({errors: standingsError.message});
+                }
+            });
         })
-        .catch((statsError) => console.log(statsError));
+        .catch((statsError) => {
+            if(statsError.response) {
+                console.log(statsError.response);
+                res.send({errors: statsError.response});
+            } else if (statsError.request) {
+                console.log(statsError.request);
+                res.send({errors: statsError.request});
+            } else {
+                console.log(statsError);
+                res.send({errors: statsError.message});
+            }
+        });
     })
-    .catch((rosterError) => console.log(rosterError));
+    .catch((rosterError) => {
+        if(rosterError.response) {
+            console.log(rosterError.response);
+            res.send({errors: rosterError.response});
+        } else if (rosterError.request) {
+            console.log(rosterError.request);
+            res.send({errors: rosterError.request});
+        } else {
+            console.log(rosterError);
+            res.send({errors: rosterError.message});
+        }
+    });
 }
 
 // get team roster data

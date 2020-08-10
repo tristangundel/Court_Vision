@@ -49,9 +49,16 @@ function getPlayerStats(html){
     let stats = [];
     for (let i = $playerStats[0].children.length - 3; i >= 0; i--) {
         let season = $playerStats[0].children[i].children[0].children[0].data;
+        let team;
+        try {
+            team = $playerStats[0].children[i].children[1].children[0].children[1].children[0].data;
+        }
+        catch (err) {
+            team = $playerStats[0].children[i].children[1].children[0].children[0].children[0].data;
+        }
         stats.push({
             season: season,
-            team: $playerStats[0].children[i].children[1].children[0].children[1].children[0].data,
+            team: team,
             GP: $playerStats[1].children[i].children[0].children[0].data,
             MIN: $playerStats[1].children[i].children[2].children[0].data,
             FGA: $playerStats[1].children[i].children[3].children[0].data.split("-")[1],
@@ -73,7 +80,6 @@ function getPlayerStats(html){
             PTS: $playerStats[1].children[i].children[17].children[0].data,
         });
     }
-    // console.log(stats);
     return stats;
 }
 
@@ -90,67 +96,18 @@ function getPlayer(ID, res) {
             photo: getPlayerPhoto(ID)
         })
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+        if(error.response) {
+            console.log(error.response);
+            res.send({errors: error.response});
+        } else if (error.request) {
+            console.log(error.request);
+            res.send({errors: error.request});
+        } else {
+            console.log(error);
+            res.send({errors: error});
+        }
+    });
 }
-
-// function getPlayerInfo(ID) {
-//     // return nba.playerInfo({PlayerID: ID});
-//     return nbaGetData('commonplayerinfo', {PlayerID: ID})
-// }
-
-// function getPlayerStats(ID) {
-//     // return nba.playerSplitsByYear({PlayerID: ID});
-//     let params = {
-//         "DateFrom": "",
-//             "DateTo": "",
-//             "GameSegment": "",
-//             "LastNGames": "0",
-//             "LeagueID": "00",
-//             "Location": "",
-//             "MeasureType": "Base",
-//             "Month": "0",
-//             "OpponentTeamID": "0",
-//             "Outcome": "",
-//             "PaceAdjust": "N",
-//             "Period": "0",
-//             "PerMode": "PerGame",
-//             "PlayerID": ID,
-//             "PlusMinus": "N",
-//             "PORound": "0",
-//             "Rank": "N",
-//             "Season": "2018-19",
-//             "SeasonSegment": "",
-//             "SeasonType": "Regular+Season",
-//             "ShotClockRange": "",
-//             "Split": "general",
-//             "VsConference": "",
-//             "VsDivision": ""
-//     };
-//     return nbaGetData('playerdashboardbyyearoveryear', params);
-// }
-
-// function getPlayer(ID, res) {
-//     getPlayerInfo(ID).then((infoData) => {
-//         if (infoData.data.resultSets){
-//             infoData = formatData(infoData.data);
-//         }
-//         getPlayerStats(ID).then((statData) => {
-//             if (statData.data.resultSets) {
-//                 statData = formatData(statData.data);
-//             }
-//             res.send({
-//                 Info: infoData,
-//                 Stats: statData,
-//                 Picture: nba.getPlayerHeadshotURL({PlayerID: ID, TeamID: infoData.CommonPlayerInfo.TEAM_ID})
-//             });
-//         })
-//         .catch((statError) => {
-//             console.log(statError);
-//         });
-//     })
-//     .catch((infoError) => {
-//         console.log(infoError);
-//     });
-// }
 
 module.exports = router;
