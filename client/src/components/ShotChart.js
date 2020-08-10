@@ -16,7 +16,7 @@ import {
   Borders,
   Hint
 } from "react-vis";
-import "../../../node_modules/react-vis/dist/style.css";
+// import "../../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
 
 var fgpByDistance = [];

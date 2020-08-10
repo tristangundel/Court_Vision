@@ -135,3 +135,5 @@ Form Button {
   color: white;
   margin-left: 10px;
 }
+
+@import "~react-vis/dist/style.css";
