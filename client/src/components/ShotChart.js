@@ -289,7 +289,7 @@ class ShotChart extends React.Component {
     } else {
       // insert shot chart front-end component here
       return (
-        <div className='container justify-content-center mt-4'>
+        <div className='container justify-content-center pb-4'>
           <div className="row">
             <div
               className='col-xl-6'
@@ -340,8 +340,8 @@ class ShotChart extends React.Component {
                   data={shotMap(this.state.shots)}
                 />
                 <Borders style={{all: {fill: '#fff'}}} />
-                <XAxis />
-                <YAxis />
+                <XAxis title="Distance in ft."/>
+                <YAxis title="Distance in ft."/>
                 {hoveredNode && (
                   <Hint
                     xType='literal'

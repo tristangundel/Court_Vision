@@ -26,7 +26,17 @@ img {
 .player-overlay {
   position: relative;
   width: 100%;
-  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,1), rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,1));
+  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3), rgba(0,0,0,.3),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,1));
+  background-size: cover;
+  background-position: center;
+  height:auto;
+  margin-top: 0;
+  margin-bottom: -50px;
+}
+.team-overlay {
+  position: relative;
+  width: 100%;
+  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3), rgba(0,0,0,.3),rgba(0,0,0,.3),rgba(0,0,0,.3),rgba(0,0,0,1), rgba(0,0,0,1));
   background-size: cover;
   background-position: center;
   height:auto;
