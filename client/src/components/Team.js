@@ -95,8 +95,8 @@ class Team extends React.Component {
         if (!(Object.keys(this.state.stats).length === 0) && typeof(this.state.stats) === "object") {
             return (
                 <div className="player justify-content-center">
-                    <div className="text-light dark-overlay">
-                        <div className="container center">
+                    <div className="text-light team-overlay">
+                        <div className="container center pb-4">
                             <div className="row">
                                 <div className="col-4">
                                     <img src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
@@ -130,9 +130,9 @@ class Team extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mb-4">
+                            <div>
                                 <h2>Team Roster</h2>
-                                <table className="table table-striped table-dark table-hover mb-4">
+                                <table className="table table-striped table-dark table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col">Player</th>
