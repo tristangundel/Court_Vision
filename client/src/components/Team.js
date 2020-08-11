@@ -157,8 +157,11 @@ class Team extends React.Component {
             return(
                 <div className="player justify-content-center">
                     <div className="text-light">
-                        <div className="container-fluid  dark-overlay center">
-                            <Loader />
+                        <div className="d-flex align-items-center container-fluid mx-auto dark-overlay center justify-content-center">
+                            <Loader 
+                                type="Puff"
+                                color="#f7f7f7"
+                            />
                         </div>
                     </div>
                 </div>
