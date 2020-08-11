@@ -48,9 +48,6 @@ async function downloadShootingData(browser, first, last) {
     const nameid = last.toLowerCase().slice(0,5) + first.toLowerCase().slice(0,2);
 
     const url = 'https://www.basketball-reference.com/players/'+fl+'/'+nameid+'01/shooting/2020';
-    const htmlFilename = './shotdata/shots.html'
-
-    console.log(`Downloading HTML from ${url}...`);
     const html = await fetchUrl(browser, url);
 
     return html;
