@@ -14,6 +14,8 @@ Tools used within project:
 - node.js
 - MongoDB (MongoDB Atlas used here)
 - mongoose - allows modeling of data
+- Express.js
+- React.js
 - GitHub - version control
 - bcyrptjs - used for password encryption
 - postman - to test requests
@@ -30,7 +32,8 @@ Dependencies used:
 - request - allows HTTP request with other APIs
 - axios - to make HTTP request
 - moment - date and time library
-- react-moment - allows us to use moemnt within react component
+- react-moment - allows us to use moment within react component
+- cypress - integration testing
 
 Dev Dependencies:
 
