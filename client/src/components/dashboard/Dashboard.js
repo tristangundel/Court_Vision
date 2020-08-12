@@ -15,7 +15,7 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile(user.user.id);
-  }, [getCurrentProfile]);
+  }, [getCurrentProfile, user.user.id]);
 
   // Check to see if we have a profile to load
   // If it is empty we show welcome new user and redirect to create form
