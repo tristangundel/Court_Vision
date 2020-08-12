@@ -59,7 +59,7 @@ router.post(
       const isMatch = await bcrypt.compare(password, user.password);
 
       // see if there is not a match
-      if (!isMatch) {XPathResult
+      if (!isMatch) {
         return res
           .status(400)
           .json([{ status: 400, msg: "Invalid Credentials" }]);

@@ -13,6 +13,7 @@ const playerKey = require('../../utils/playerKey')
 router.get("/:playerID", (req, res) => {
     //const regex = /%20/g;
     //const ID = nba.getPlayerID(req.params.playerID.replace(regex, " ")).PlayerID;
+    console.log(playerKey[req.params.playerID]);
     getPlayer(playerKey[req.params.playerID], res);
 
 });
@@ -49,7 +50,7 @@ function getPlayerBasics(html) {
 // get player regular season averages per season
 function getPlayerStats(html){
     let $ = cheerio.load(html);
-    let $playerStats = $('section.ResponsiveTable.ResponsiveTable--fixed-left tbody').toArray();
+    let $playerStats = $('.ResponsiveTable.ResponsiveTable--fixed-left tbody').toArray();
     let stats = [];
     for (let i = $playerStats[0].children.length - 3; i >= 0; i--) {
         let season = $playerStats[0].children[i].children[0].children[0].data;
