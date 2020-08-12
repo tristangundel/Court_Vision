@@ -1,6 +1,5 @@
 import React from "react";
 import {curveCatmullRom} from 'd3-shape';
-import Loader from 'react-loader-spinner';
 import {
   XYPlot,
   XAxis,
@@ -9,18 +8,14 @@ import {
   HorizontalGridLines,
   VerticalBarSeries,
   LabelSeries,
-  ChartLabel,
   LineSeries,
   DiscreteColorLegend,
-  Crosshair,
   HexbinSeries,
   Borders,
   Hint
 } from "react-vis";
 // import "../../../node_modules/react-vis/dist/style.css";
 const axios = require("axios");
-
-var fgpByDistance = [];
 
 
 const shotMarks = (shots) =>
@@ -59,7 +54,7 @@ var shotDistance = (shots) => {
   var missesByDistance = [];
   var fgpByDistance = [];
 
-  shots.map((shot) => {
+  shots.forEach((shot) => {
     var distance = Math.round(
       Math.sqrt((shot.x - 247) ** 2 + (shot.y - 45) ** 2) / 10.417
     );
@@ -78,21 +73,21 @@ var shotDistance = (shots) => {
     missCount[i] = 0;
   }
 
-  shotDistData.map((dist) => {
+  shotDistData.forEach((dist) => {
     distCount[dist] += 1;
   });
 
-  makeDistData.map((dist) => {
+  makeDistData.forEach((dist) => {
     makeCount[dist] += 1;
   });
 
-  missDistData.map((dist) => {
+  missDistData.forEach((dist) => {
     missCount[dist] += 1;
   });
 
   var entriesD = Object.entries(distCount);
 
-  entriesD.map((entry) => {
+  entriesD.forEach((entry) => {
     var item = { x: entry[0].toString(), y: entry[1] };
 
     shotsByDistance.push(item);
@@ -100,14 +95,14 @@ var shotDistance = (shots) => {
 
   var entriesMa = Object.entries(makeCount);
 
-  entriesMa.map((entry) => {
+  entriesMa.forEach((entry) => {
     var item = { x: entry[0].toString(), y: entry[1] };
     makesByDistance.push(item);
   });
 
   var entriesMi = Object.entries(missCount);
 
-  entriesMi.map((entry) => {
+  entriesMi.forEach((entry) => {
     var item = { x: entry[0].toString(), y: entry[1] };
 
     missesByDistance.push(item);
@@ -134,10 +129,10 @@ var shotDistance = (shots) => {
   return allShots;
 };
 
-var distLabels = shotsByDistance.map((d, idx) => ({
-  x: d.x,
-  y: Math.max(shotsByDistance[idx].y),
-}));
+// var distLabels = shotsByDistance.map((d, idx) => ({
+//   x: d.x,
+//   y: Math.max(shotsByDistance[idx].y),
+// }));
 
 var makeMissLabels = shotsByDistance.map((d, idx) => ({
   x: d.x,
@@ -146,7 +141,6 @@ var makeMissLabels = shotsByDistance.map((d, idx) => ({
 
 var distChart = (shots) => {
   const allShots = shotDistance(shots);
-  const shotsByDistance = allShots[0];
   const makesByDistance = allShots[1];
   const missesByDistance = allShots[2];
   fgpByDistance = allShots[3];
@@ -222,7 +216,7 @@ var distChart = (shots) => {
 
 var shotMap = (shots) => {
   var shotMapData = [];
-  shots.map((shot) => {
+  shots.forEach((shot) => {
     var item = {"xdist": ((shot.x-247)/10.417), "ydist":((shot.y-45)/10.417)}
     shotMapData.push(item);
   })
@@ -280,7 +274,7 @@ class ShotChart extends React.Component {
   };
 
   render() {
-    const {data, radius, hoveredNode, offset} = this.state;
+    const {radius, hoveredNode, offset} = this.state;
     if (this.state.shots === "") {
       return null;
     } else {

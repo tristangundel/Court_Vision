@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { Card } from "react-bootstrap";
 import { Redirect, Link } from 'react-router-dom';
-const playerList = require('../utils/playerList');
 
 
 class PlayerCard extends React.Component {

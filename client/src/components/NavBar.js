@@ -108,9 +108,9 @@ class NavBar extends React.Component {
                             </form> */}
                             <SearchBar options={playerList}/>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Teams
-                                </a>
+                                </div>
                                 <div className='dropdown-menu' aria-labelledby="navbarDropdownMenuLink">
                                     {ecTeamsDropdown}
                                     {wcTeamsDropdown}
