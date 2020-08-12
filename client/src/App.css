@@ -1,139 +1,141 @@
 img {
-  width: 100%;
+    width: 100%;
 }
 
 .landing {
-  position: relative;
-  background: url("./img/background.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  margin-top: -24px;
-  margin-bottom: -50px;
+    position: relative;
+    background: url("./img/background.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: -24px;
+    margin-bottom: -50px;
 }
 
 .player {
-  position: relative;
-  width: 100%;
-  background-image: url('./img/background.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  margin-top: -24px;
-  margin-bottom: -50px;
+    position: relative;
+    width: 100%;
+    background-image: url('./img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: -24px;
+    margin-bottom: -50px;
 }
 
 .player-overlay {
-  position: relative;
-  width: 100%;
-  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3), rgba(0,0,0,.3),rgba(0,0,0,1),rgba(0,0,0,1),rgba(0,0,0,1), rgba(0,0,0,1));
-  background-size: cover;
-  background-position: center;
-  height:auto;
-  margin-top: 0;
-  margin-bottom: -50px;
+    position: relative;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: -50px;
 }
+
 .team-overlay {
-  position: relative;
-  width: 100%;
-  background-image: linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3), rgba(0,0,0,.3),rgba(0,0,0,.3),rgba(0,0,0,.3),rgba(0,0,0,1), rgba(0,0,0,1));
-  background-size: cover;
-  background-position: center;
-  height:auto;
-  margin-top: 0;
-  margin-bottom: -50px;
+    position: relative;
+    width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, .3), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    margin-top: 0;
+    margin-bottom: -50px;
 }
 
 .league-leader {
-  position: relative;
-  background: url("./img/background.jpg") no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  margin-top: -24px;
-  margin-bottom: -50px;
+    position: relative;
+    background: url("./img/background.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin-top: -24px;
+    margin-bottom: -50px;
 }
 
 .landing-inner {
-  padding-top: 80px;
+    padding-top: 80px;
 }
 
 .dark-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .card-form {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 .latest-profiles-img {
-  width: 40px;
-  height: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .form-control::placeholder {
-  color: #bbb !important;
+    color: #bbb !important;
 }
 
 .authForm {
-  width: 40%;
-  min-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
-  border: 1px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-  align-self: center;
-  text-align: left;
+    width: 40%;
+    min-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+    align-self: center;
+    text-align: left;
 }
 
 Form Button {
-  width: 100%;
+    width: 100%;
 }
 
 .search {
-  display: block;
-  width: 300px;
+    display: block;
+    width: 300px;
 }
 
 .search-box {
-  width: 85%;
+    height: 115%;
+    width: 85%;
 }
 
 .search-container {
-  width: 250px;
-  z-index: 1040;
-  max-height: 35px;
-  overflow-y: visible;
+    min-width: 260px;
+    z-index: 1040;
+    max-height: 40px;
+    overflow-y: visible;
 }
 
 .navbar {
-  overflow-y: visible;
+    overflow-y: visible;
 }
 
 .options {
-  list-style: none;
-  background-color: white;
-  width: 85%;
-  padding: 0px;
+    list-style: none;
+    background-color: white;
+    width: 85%;
+    padding: 0px;
 }
 
 .options li {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 2px;
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 2px;
 }
 
-.search-button i {
-  padding: 0;
-  color: white;
-  margin-left: 10px;
+.search-button {
+    height: 115%;
+    color: white;
+    margin-left: 3px;
 }
 
 @import "~react-vis/dist/style.css";

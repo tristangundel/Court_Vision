@@ -93,7 +93,7 @@ class NavBar extends React.Component {
         );
               
         return (
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
                 <div className="container"> 
                     <i className="fas fa-basketball-ball text-light fa-2x mr-2"></i>
                     <Link className="navbar-brand" to="/">CourtVision</Link>
@@ -108,9 +108,9 @@ class NavBar extends React.Component {
                             </form> */}
                             <SearchBar options={playerList}/>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Teams
-                                </a>
+                                </div>
                                 <div className='dropdown-menu' aria-labelledby="navbarDropdownMenuLink">
                                     {ecTeamsDropdown}
                                     {wcTeamsDropdown}
