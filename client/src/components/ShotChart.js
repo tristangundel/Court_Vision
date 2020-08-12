@@ -1,5 +1,6 @@
 import React from "react";
 import {curveCatmullRom} from 'd3-shape';
+import Loader from 'react-loader-spinner';
 import {
   XYPlot,
   XAxis,
@@ -237,7 +238,7 @@ class ShotChart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shots: [],
+      shots: "",
       crosshairValues: [],
       data: [],
       hoveredNode: null,
@@ -247,7 +248,7 @@ class ShotChart extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.shots.length === 0) {
+    if (this.state.shots === "") {
       axios
         .get(`/api/shots/${this.props.player}`)
         .then((results) => {
@@ -280,12 +281,8 @@ class ShotChart extends React.Component {
 
   render() {
     const {data, radius, hoveredNode, offset} = this.state;
-    if (this.state.shots.length === 0) {
-      return (
-        <div className='mx-2'>
-          <h1 className='display-4'>Shot Data Loading...</h1>
-        </div>
-      );
+    if (this.state.shots === "") {
+      return null;
     } else {
       // insert shot chart front-end component here
       return (

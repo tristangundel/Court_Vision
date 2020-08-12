@@ -9,7 +9,6 @@ const playerList = [
     "Harrison Barnes",
     "Jordan Bone",
     "DeAndre' Bembry",
-    "Michael Beasley",
     "Davis Bertans",
     "Darius Bazley",
     "Goga Bitadze",

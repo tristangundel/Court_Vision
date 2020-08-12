@@ -93,7 +93,7 @@ class NavBar extends React.Component {
         );
               
         return (
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
                 <div className="container"> 
                     <i className="fas fa-basketball-ball text-light fa-2x mr-2"></i>
                     <Link className="navbar-brand" to="/">CourtVision</Link>

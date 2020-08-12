@@ -16,6 +16,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Player from "./components/Player";
+import SearchResults from "./components/SearchResults";
 import Team from "./components/Team";
 import LeagueLeaders from "./components/LeagueLeaders";
 
@@ -44,8 +45,8 @@ function App() {
                 path='/create-profile'
                 component={CreateProfile}
               />
-              <Route exact path='/testplayer' component={Player} />
               <Route exact path='/player/:playerID' component={Player} />
+              <Route exact path='/search/:playerID' component={SearchResults} />
               <Route exact path='/team/:teamID' component={Team} />
               <Route exact path='/leagueleaders' component={LeagueLeaders} />
             </Switch>

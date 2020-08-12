@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
+import { Link, Redirect } from 'react-router-dom';
 
 
 class SearchBar extends React.Component {
@@ -10,11 +11,13 @@ class SearchBar extends React.Component {
             activeOption: 0,
             filteredOptions: [],
             showOptions: false,
-            userInput: ''
+            userInput: '',
+            redirectToPlayer: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -59,6 +62,16 @@ class SearchBar extends React.Component {
           });
     }
 
+    handleSubmit() {
+        this.setState({
+            activeOption: 0,
+            filteredOptions: [],
+            showOptions: false,
+            userInput: '',
+            redirectToPlayer: this.state.userInput
+        });
+    }
+
     static propTypes = {
         options: PropTypes.instanceOf(Array).isRequired
     };
@@ -97,20 +110,24 @@ class SearchBar extends React.Component {
         }
         return (
             <React.Fragment>
-                <div className="search-container p-1">
+                <div className="search-container p-1 d-inline">
                     <input 
                         type="text"
                         className="search-box"
+                        placeholder="Player Search"
                         onChange={this.handleChange}
                         onKeyDown={this.handleKeyDown}
                         value={this.state.userInput}
                     />
-                    <Link 
-                        to={`/player/${this.state.userInput}`}
+                    <Button 
+                        variant="dark"
+                        size="sm"
+                        onClick={this.handleSubmit}
                         className="search-button">
                         <i className="fa fa-search" aria-hidden="true"></i>
-                    </Link>
+                    </Button>
                     {optionList}
+                    {this.state.redirectToPlayer !== "" ? <Redirect to={"/search/" + this.state.redirectToPlayer} /> : null}
                 </div>
             </React.Fragment>
         );
