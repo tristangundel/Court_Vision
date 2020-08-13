@@ -34,38 +34,38 @@ class LeagueLeaders extends React.Component {
                         <div className='ml-10px'>
                             <h1 className='display-4'>League Leaders</h1>
                         </div>
-                        <div className="row">
-                            <div className="col-4">
+                        <div className="row ">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="PPG"
                                     players={this.state.PPG}
                                 />
                             </div>
-                            <div className="col-4">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="APG"
                                     players={this.state.APG}
                                 />
                             </div>
-                            <div className="col-4">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="RPG"
                                     players={this.state.RPG}
                                 />
                             </div>
-                            <div className="col-4">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="BPG"
                                     players={this.state.BPG}
                                 />
                             </div>
-                            <div className="col-4">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="SPG"
                                     players={this.state.SPG}
                                 />
                             </div>
-                            <div className="col-4">
+                            <div className="col-md-6 col-xl-4">
                                 <LeaderTable 
                                     stat="3PM"
                                     players={this.state.THREEPM}
