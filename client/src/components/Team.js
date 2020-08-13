@@ -98,37 +98,41 @@ class Team extends React.Component {
                     <div className="text-light team-overlay">
                         <div className="container center pb-4">
                             <div className="row">
-                                <div className="col-4">
+                                <div className="col-sm-12 col-md-4">
                                     <img src={ this.state.logo } alt={`${this.state.standings.name}`}></img>
                                 </div>
-                                <div className="col-8">
+                                <div className="col-sm-12 col-md-8">
                                     <h1 className="display-1">
                                         {`${this.state.standings.name}`}
                                     </h1>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12 col-md-3">
+                                    <div>2019-20 Season </div>
+                                    <div>{this.state.standings.W}-{this.state.standings.L} ({this.state.standings.PCT})</div>
+                                    <div> {getRank(this.state.standings.rank)} in {this.state.standings.conference}</div>
+                                </div>
+                                <div className="col-sm-12 col-md-8">
                                     <div className="row">
-                                        <div className="col-3">
-                                            <div>2019-20 Season </div>
-                                            <div>{this.state.standings.W}-{this.state.standings.L} ({this.state.standings.PCT})</div>
-                                            <div> {getRank(this.state.standings.rank)} in {this.state.standings.conference}</div>
-                                        </div>
-                                        <div className="col-2 text-center">
+                                        <div className="col col-md-3 text-center">
                                             <h2>PPG</h2>
                                             <h3>{getRank(this.state.stats.ppg)}</h3>
                                         </div>
-                                        <div className="col-2 text-center">
+                                        <div className="col col-md-3 text-center">
                                             <h2>RPG</h2>
                                             <h3>{getRank(this.state.stats.rpg)}</h3>
                                         </div>
-                                        <div className="col-2 text-center">
+                                        <div className="col col-md-3 text-center">
                                             <h2>APG</h2>
                                             <h3>{getRank(this.state.stats.apg)}</h3>
                                         </div>
-                                        <div className="col-2 text-center">
+                                        <div className="col col-md-3 text-center">
                                             <h2>OPPG</h2>
                                             <h3>{getRank(this.state.stats.oppg)}</h3>
-                                        </div>   
+                                        </div>
                                     </div>
-                                </div>
+                                </div>  
                             </div>
                             <div>
                                 <h2>Team Roster</h2>
