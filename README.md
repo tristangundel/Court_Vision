@@ -2,6 +2,8 @@
 
 Court Vision is a web based application for users to see statistics about their favorite players in the NBA with easy to follow visualizations. Basketball data will be scraped via the stats.nba.com API and dynamically displayed to the user. Users will be able to make informed decisions in fantasy leagues as well as wagers. (Oregon State University - CS467 Capstone Project)
 
+Current version of the website can be seen here: http://courtvis.in/
+
 Server runs at port 5000, client runs at port 3000. \
 To start: \
 run "npm install" in client directory \
