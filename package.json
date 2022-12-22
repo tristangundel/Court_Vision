@@ -31,7 +31,7 @@
         "express": "^4.17.1",
         "express-validator": "^6.6.0",
         "fs": "0.0.1-security",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "lodash": "^4.17.21",
         "mini-create-react-context": "^0.4.0",
         "moment": "^2.29.4",
