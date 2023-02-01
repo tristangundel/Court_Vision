@@ -35,7 +35,7 @@
         "lodash": "^4.17.21",
         "mini-create-react-context": "^0.4.0",
         "moment": "^2.29.4",
-        "mongoose": "^5.9.26",
+        "mongoose": "^5.13.15",
         "nba-api-client": "^1.1.0",
         "path": "^0.12.7",
         "puppeteer": "^5.2.1",
